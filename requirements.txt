@@ -1,3 +1,10 @@
-Django>=6.1,<6.2
-wagtail>=8.0,<8.1
-python-dotenv
+# Top-level (direct) dependencies only, with the version ranges we support.
+# Exact versions of these AND all their transitive dependencies are pinned in
+# requirements.lock -- that is the file you install from.
+#
+#   Install:    pip install -r requirements.lock
+#   Regenerate: pip install -r requirements.txt && pip freeze > requirements.lock
+Django>=5.2,<5.3
+wagtail>=7.4,<7.5
+psycopg[binary]>=3.2,<4
+python-dotenv>=1.0,<2

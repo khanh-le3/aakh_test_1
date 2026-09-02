@@ -1,0 +1,199 @@
+/* ==========================================================================
+   AAKH design tokens
+   --------------------------------------------------------------------------
+   Source of truth: Figma "AAKH- Website" + .claude/rules/design_system.md
+   (CivicTheme adapted: navy #032059, teal #0B7A66, gold #C9A227, ivory #F7F5F0).
+
+   Three layers:
+     1. Primitives  (--aakh-*)  raw palette values. Never used by components.
+     2. Semantic    (--color-*, --text-*, --space-*, ...) roles. Components
+        consume ONLY these, so a palette change is a one-file edit.
+     3. Preference overrides (html[data-a11y-*]) driven by the
+        "Accessibility options" panel. Every component responds automatically
+        because everything is expressed in rem + semantic tokens.
+
+   Contrast notes (WCAG 2.2 AA, checked 2026-08):
+     - teal on ivory 4.83:1, white on teal 5.17:1, body on ivory 10.8:1  PASS
+     - Wattle gold (#C9A227) is 2.2:1 on ivory: DECORATIVE USE ONLY on light
+       backgrounds (accent bars). As text/icons it may only sit on navy (6.4:1).
+   ========================================================================== */
+
+/* --- Self-hosted Lexend (variable weight, latin) --- */
+@font-face {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/lexend-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ----- 1. Primitives ----- */
+  --aakh-navy-950:   #010d24;  /* headings (brand 1 + 60% black)      */
+  --aakh-navy-900:   #032059;  /* brand 1                             */
+  --aakh-teal-800:   #07493d;  /* interaction hover/active (b2 + 40%) */
+  --aakh-teal-600:   #0b7a66;  /* brand 2 / interaction               */
+  --aakh-gold-400:   #c9a227;  /* brand 3 wattle - decorative on light*/
+  --aakh-ivory-300:  #c6c4c0;  /* background dark (ivory + 5% black)  */
+  --aakh-ivory-50:   #f7f5f0;  /* background                          */
+  --aakh-ivory-25:   #fefefd;  /* background light (ivory + 70% white)*/
+  --aakh-white:      #fdfdfc;  /* text on dark fills, interaction text*/
+  --aakh-black:      #000000;  /* card top accent                     */
+  --aakh-grey-900:   #333841;  /* border dark (background + 90% black)*/
+  --aakh-grey-700:   #636260;  /* border                              */
+  --aakh-grey-400:   #b9b8b4;  /* border light (background + 25%)     */
+  --aakh-acami-blue: #5979ff;  /* ACAMI brand mark (footer colophon)  */
+
+  /* ----- 2. Semantic: colour ----- */
+  --color-bg: var(--aakh-ivory-50);
+  --color-bg-band: var(--aakh-ivory-300);        /* header / banded sections */
+  --color-bg-raised: var(--aakh-ivory-25);       /* cards, inputs */
+  --color-bg-emphasis: var(--aakh-navy-900);     /* tags, dark panels */
+  --color-heading: var(--aakh-navy-950);
+  --color-text: var(--aakh-grey-900);
+  --color-text-on-emphasis: var(--aakh-white);   /* text on bg-emphasis / interactive fills */
+  --color-brand: var(--aakh-navy-900);
+  --color-interactive: var(--aakh-teal-600);     /* links, buttons, active nav */
+  --color-interactive-hover: var(--aakh-teal-800);
+  --color-accent: var(--aakh-gold-400);          /* decorative accents only */
+  --color-card-accent: var(--aakh-black);
+  --color-border: var(--aakh-grey-400);          /* decorative hairlines */
+  --color-border-input: var(--aakh-grey-700);    /* functional: 5.6:1 */
+  --color-focus: var(--aakh-navy-900);           /* focus ring: 14:1 on ivory */
+  --color-logo-acami: var(--aakh-acami-blue);
+  /* Partner/brand logos are raster art tuned for light backgrounds. Dark or
+     high-contrast schemes set a plate colour + padding and every logo gets a
+     legible backing without touching component CSS or templates. */
+  --color-logo-plate: transparent;
+  --logo-plate-pad: 0px;
+  /* Hero banner texture is tuned for the light scheme; other schemes can set
+     --hero-texture: none or change the blend without touching .hero. */
+  --hero-texture: url("../img/texture-uluru.png");
+  --hero-texture-blend: screen;
+
+  /* ----- 2. Semantic: typography -----
+     Sizes in rem so the text-size preference scales everything.
+     clamp() = mobile size -> Figma desktop size. Unitless line-height. */
+  --font-body: "Lexend", "Segoe UI", system-ui, sans-serif;
+  --text-h1-size: clamp(2rem, 1.55rem + 2vw, 3rem);          /* 32 -> 48px */
+  --text-h1-lh: 1.25;
+  --text-h1-ls: -0.02em;
+  --text-h2-size: clamp(1.75rem, 1.43rem + 1.4vw, 2.4375rem); /* 28 -> 39px */
+  --text-h2-lh: 1.23;
+  --text-h2-ls: -0.02em;
+  --text-h3-size: clamp(1.5rem, 1.28rem + 1vw, 2rem);         /* 24 -> 32px */
+  --text-h3-lh: 1.25;
+  --text-h3-ls: -0.019em;
+  --text-h4-size: clamp(1.25rem, 1.16rem + 0.4vw, 1.5625rem); /* 20 -> 25px */
+  --text-h4-lh: 1.24;
+  --text-h4-ls: -0.016em;
+  --text-lg-size: clamp(1.125rem, 1.07rem + 0.25vw, 1.25rem); /* 18 -> 20px */
+  --text-lg-lh: 1.7;
+  --text-body-size: 1rem;                                     /* 16px */
+  --text-body-lh: 1.75;
+  --text-sm-size: 0.875rem;                                   /* 14px */
+  --text-sm-lh: 1.78;
+  --text-label-size: 1rem;                    /* buttons, links, nav: 16/20 */
+  --text-label-lh: 1.25;
+  --text-label-lg-size: 1.125rem;             /* large buttons: 18/24 */
+  --text-label-lg-lh: 1.33;
+
+  /* ----- 2. Semantic: spacing / layout ----- */
+  --space-2xs: 0.25rem;   /*  4px */
+  --space-xs: 0.5rem;     /*  8px */
+  --space-sm: 0.75rem;    /* 12px */
+  --space-md: 1rem;       /* 16px */
+  --space-lg: 1.5rem;     /* 24px */
+  --space-xl: 2rem;       /* 32px */
+  --space-2xl: 3rem;      /* 48px  (Figma Vertical Spacing M) */
+  --space-3xl: 4rem;      /* 64px */
+  --space-section: clamp(3rem, 2rem + 4vw, 6.25rem);  /* 48 -> 100px */
+  --container-max: 78rem;                              /* 1248px grid */
+  --container-pad: clamp(1rem, 0.15rem + 4.25vw, 3rem); /* 16 -> 48px gutters */
+  --grid-gap: 1.5rem;                                  /* 24px gutter */
+  /* Height of a single-line form control (text input, and any button sitting
+     on the same row as one). One value so every field on the site matches,
+     wherever it appears */
+  --control-height: 3rem;                              /* 48px */
+
+  /* ----- 2. Semantic: shape / elevation / focus ----- */
+  --radius: 0.25rem;       /* 4px */
+  --radius-pill: 999px;
+  --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.2);      /* Figma Elevation 2 */
+  --focus-ring: 3px solid var(--color-focus);
+  --focus-offset: 2px;
+  --transition: 150ms ease-out;
+
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   ADDING A COLOUR SCHEME (dark, high contrast, ...)
+   --------------------------------------------------------------------------
+   Contract: components (aakh.css) consume ONLY semantic tokens and never
+   introduce raw colours, so a new scheme is a single block here remapping
+   the semantic layer - no component or template edits. Pattern:
+
+     html[data-a11y-theme="dark"] {
+       --color-bg: <dark primitive>;
+       --color-text: ...;
+       --color-interactive: <lightened teal that passes AA on dark>;
+       --color-focus: var(--aakh-gold-400);   (gold passes on navy)
+       --color-logo-plate: var(--aakh-ivory-25);
+       --logo-plate-pad: 0.5rem;
+       --hero-texture: none;
+       --shadow-card: none;                   (prefer borders on dark)
+       color-scheme: dark;
+     }
+
+   Wire the toggle as another control in the accessibility options panel
+   (data-a11y-theme via the existing localStorage plumbing in aakh.js).
+   Re-check every remapped pair against WCAG 2.2 AA before shipping.
+   Windows High Contrast Mode (forced-colors) ignores ALL custom properties;
+   components carry transparent-border fallbacks so boundaries survive it.
+   ========================================================================== */
+
+/* ==========================================================================
+   3. Accessibility preference overrides
+   Set as data attributes on <html> by the "Accessibility options" panel
+   (aakh.js) and applied before first paint by an inline script in base.html.
+   ========================================================================== */
+
+/* Text size: rem-based layout means bumping the root size scales the site. */
+html[data-a11y-textsize="lg"] { font-size: 115%; }
+html[data-a11y-textsize="xl"] { font-size: 130%; }
+
+/* Increased text spacing (WCAG 1.4.12 metrics). */
+html[data-a11y-spacing="on"] body {
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+}
+html[data-a11y-spacing="on"] body * {
+  letter-spacing: inherit !important;
+  line-height: 1.5 !important;
+}
+html[data-a11y-spacing="on"] p {
+  margin-block-end: 2em !important;
+}
+
+/* Reduced motion: honour both the OS setting and the site toggle. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html[data-a11y-motion="reduce"] *,
+html[data-a11y-motion="reduce"] *::before,
+html[data-a11y-motion="reduce"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}

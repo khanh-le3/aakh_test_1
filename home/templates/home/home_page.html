@@ -1,21 +1,116 @@
 {% extends "base.html" %}
-{% load static %}
+{% load wagtailcore_tags wagtailimages_tags aakh_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
-{% block extra_css %}
-
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-{% include 'home/welcome_page.html' %}
+{# --- Hero ------------------------------------------------------------- #}
+<section class="hero" aria-labelledby="hero-heading">
+    <div class="container hero__inner">
+        <div class="hero__content">
+            <h1 class="hero__title" id="hero-heading">{{ page.hero_heading }}</h1>
+            <div class="hero__intro">{{ page.hero_intro|richtext }}</div>
+            <div class="hero__ctas">
+                {% if page.hero_cta_primary_page %}
+                <a class="btn btn--primary" href="{% pageurl page.hero_cta_primary_page %}">
+                    {{ page.hero_cta_primary_label }}
+                </a>
+                {% endif %}
+                {% if page.hero_cta_secondary_page %}
+                <a class="btn btn--secondary" href="{% pageurl page.hero_cta_secondary_page %}">
+                    {{ page.hero_cta_secondary_label }}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% if page.hero_image %}
+        <div class="hero__media">
+            {% image page.hero_image width-1250 as hero_img %}
+            <img class="hero__image" src="{{ hero_img.url }}"
+                 width="{{ hero_img.width }}" height="{{ hero_img.height }}"
+                 alt="{{ hero_img.alt }}">
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{# --- Featured resources ------------------------------------------------ #}
+{% if page.featured_cards.all %}
+<section class="section section--band" aria-labelledby="featured-heading">
+    <div class="container">
+        <div class="section__header">
+            <h2 id="featured-heading">Featured resources</h2>
+            {# TODO: point at AssetIndexPage once the Knowledge library exists. #}
+        </div>
+        <div class="section__accent" aria-hidden="true"></div>
+        {% if page.featured_intro %}
+        <p class="section__intro">{{ page.featured_intro }}</p>
+        {% endif %}
+        <ul class="card-grid section__body">
+            {% for card in page.featured_cards.all %}
+            {% include "includes/card.html" %}
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endif %}
+
+{# --- News and updates --------------------------------------------------- #}
+{% if page.news_slides.all %}
+<section class="section" aria-labelledby="news-heading">
+    <div class="container">
+        <div class="section__header">
+            <h2 id="news-heading">News and updates</h2>
+            {# TODO: point at NewsIndexPage once the News section exists. #}
+        </div>
+        <div class="section__accent" aria-hidden="true"></div>
+
+        <div class="carousel section__body" data-carousel role="group" aria-roledescription="carousel"
+             aria-label="Latest news">
+            <div class="carousel__slides">
+                {% for slide in page.news_slides.all %}
+                <article class="carousel__slide" data-carousel-slide
+                         aria-label="Slide {{ forloop.counter }} of {{ page.news_slides.all|length }}">
+                    <div class="news-panel">
+                        <div class="news-panel__content">
+                            <h3>{{ slide.title }}</h3>
+                            <p class="news-panel__date">{{ slide.date|date:"j F Y" }}</p>
+                            <p>{{ slide.summary }}</p>
+                            <a class="btn btn--primary" href="{{ slide.url }}">
+                                {{ slide.cta_label }}
+                                {% icon "arrow-right-24" %}
+                                <span class="visually-hidden">: {{ slide.title }}</span>
+                            </a>
+                        </div>
+                        {% if slide.image %}
+                        <div class="news-panel__image">
+                            {% image slide.image width-960 as news_img %}
+                            <img src="{{ news_img.url }}"
+                                 width="{{ news_img.width }}" height="{{ news_img.height }}"
+                                 alt="{{ news_img.alt }}">
+                        </div>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+            <div class="carousel__controls" data-carousel-controls hidden>
+                <div class="carousel__buttons">
+                    <button class="btn btn--secondary" type="button" data-carousel-prev>
+                        {% icon "arrow-left-24" %}
+                        Prev
+                    </button>
+                    <button class="btn btn--secondary" type="button" data-carousel-next>
+                        Next
+                        {% icon "arrow-right-24" %}
+                    </button>
+                </div>
+                <p class="carousel__status" data-carousel-status role="status"></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
 
 {% endblock content %}

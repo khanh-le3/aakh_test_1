@@ -27,6 +27,7 @@ load_dotenv(BASE_DIR / ".env")
 # Application definition
 
 INSTALLED_APPS = [
+    "core",
     "home",
     "search",
     "wagtail.contrib.forms",
@@ -172,7 +173,7 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "aakh"
+WAGTAIL_SITE_NAME = "Australian Autism Knowledge Hub"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html

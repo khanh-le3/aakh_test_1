@@ -1,7 +1,7 @@
 {% load static wagtailcore_tags wagtailuserbar %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -23,7 +23,22 @@
         <base target="_blank">
         {% endif %}
 
+        {# Apply saved accessibility preferences before first paint (no flash). #}
+        <script>
+            (function () {
+                try {
+                    var prefs = JSON.parse(localStorage.getItem("aakh-a11y")) || {};
+                    var attrs = { textsize: "data-a11y-textsize", spacing: "data-a11y-spacing", motion: "data-a11y-motion" };
+                    for (var key in attrs) {
+                        if (prefs[key]) document.documentElement.setAttribute(attrs[key], prefs[key]);
+                    }
+                } catch (e) {}
+            })();
+        </script>
+
         {# Global stylesheets #}
+        <link rel="preload" href="{% static 'fonts/lexend-latin-var.woff2' %}" as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/tokens.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/aakh.css' %}">
 
         {% block extra_css %}
@@ -34,7 +49,15 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
-        {% block content %}{% endblock %}
+        <a class="skip-link" href="#main-content">Skip to main content</a>
+
+        {% include "includes/header.html" %}
+
+        <main id="main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include "includes/footer.html" %}
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/aakh.js' %}"></script>

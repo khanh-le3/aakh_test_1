@@ -1,0 +1,12 @@
+{
+  // Pin the editor to this project's virtualenv. Without this, VS Code guesses
+  // an interpreter, and diagnostics differ per machine (e.g. a globally
+  // installed django-stubs flags valid Wagtail field kwargs like `features=`).
+  "python.defaultInterpreterPath": "${workspaceFolder}/env/bin/python",
+  "python.analysis.extraPaths": ["${workspaceFolder}"],
+
+  // Wagtail ships no type stubs, so Pylance cannot verify Wagtail-specific
+  // kwargs. "basic" still catches real errors (typos, bad imports, None misuse)
+  // without inventing failures from third-party stub gaps.
+  "python.analysis.typeCheckingMode": "basic"
+}

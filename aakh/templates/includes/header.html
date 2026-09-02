@@ -1,0 +1,71 @@
+{% load static wagtailcore_tags aakh_tags %}
+{% wagtail_site as current_site %}
+
+<header class="header">
+    <div class="container header__top">
+        <a class="header__logo-link" href="{% pageurl current_site.root_page %}">
+            <img class="header__logo"
+                 src="{% static 'img/logo-aakh-colour-transparent.png' %}"
+                 alt="Australian Autism Knowledge Hub - home">
+        </a>
+        <form class="search-form" role="search" action="{% url 'search' %}" method="get">
+            <div class="search-form__field">
+                {% icon "search" %}
+                <label class="visually-hidden" for="site-search">Search the site</label>
+                <input class="input search-form__input" type="search" id="site-search"
+                       name="query" placeholder="Search the site">
+            </div>
+            <button class="btn btn--primary btn--field search-form__submit" type="submit">Search</button>
+        </form>
+    </div>
+</header>
+
+{# Sticky navigation row. Sits outside <header> so position:sticky works. #}
+<nav class="site-nav" aria-label="Main menu">
+    <div class="container site-nav__inner">
+        {# Menu entries are fixed; edit core/navigation.py, not this file. #}
+        {% main_menu as menu_items %}
+        <ul class="site-nav__list">
+            {% for item in menu_items %}
+            <li>
+                <a class="site-nav__link" href="{{ item.path }}"
+                   {% if item.aria_current %}aria-current="{{ item.aria_current }}"{% endif %}>
+                    {% icon item.icon %}
+                    {{ item.label }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="a11y-options" data-a11y-options>
+            <button class="btn btn--secondary btn--small" type="button"
+                    data-a11y-toggle aria-expanded="false" aria-controls="a11y-panel">
+                Accessibility options
+                {% icon "accessibility" %}
+            </button>
+            <div class="a11y-options__panel" id="a11y-panel" data-a11y-panel hidden>
+                <fieldset class="a11y-options__group">
+                    <legend>Text size</legend>
+                    <label class="a11y-options__choice">
+                        <input type="radio" name="textsize" value="" checked> Default
+                    </label>
+                    <label class="a11y-options__choice">
+                        <input type="radio" name="textsize" value="lg"> Large
+                    </label>
+                    <label class="a11y-options__choice">
+                        <input type="radio" name="textsize" value="xl"> Extra large
+                    </label>
+                </fieldset>
+                <fieldset class="a11y-options__group">
+                    <legend>Reading</legend>
+                    <label class="a11y-options__choice">
+                        <input type="checkbox" name="spacing"> Increase text spacing
+                    </label>
+                    <label class="a11y-options__choice">
+                        <input type="checkbox" name="motion"> Reduce motion
+                    </label>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</nav>

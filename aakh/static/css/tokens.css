@@ -32,7 +32,7 @@
 
 :root {
   /* ----- 1. Primitives ----- */
-  --aakh-navy-950:   #010d24;  /* headings (brand 1 + 60% black)      */
+  --aakh-navy-950:   #010d24;  /* headings, brand hover (b1 + 60% blk)*/
   --aakh-navy-900:   #032059;  /* brand 1                             */
   --aakh-teal-800:   #07493d;  /* interaction hover/active (b2 + 40%) */
   --aakh-teal-600:   #0b7a66;  /* brand 2 / interaction               */
@@ -56,6 +56,7 @@
   --color-text: var(--aakh-grey-900);
   --color-text-on-emphasis: var(--aakh-white);   /* text on bg-emphasis / interactive fills */
   --color-brand: var(--aakh-navy-900);
+  --color-brand-hover: var(--aakh-teal-600);   /* nav hover/active: 17.8:1 on ivory */
   --color-interactive: var(--aakh-teal-600);     /* links, buttons, active nav */
   --color-interactive-hover: var(--aakh-teal-800);
   --color-accent: var(--aakh-gold-400);          /* decorative accents only */

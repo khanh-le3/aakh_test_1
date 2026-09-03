@@ -1,6 +1,10 @@
 /* ==========================================================================
    AAKH global styles. Tokens live in tokens.css (loaded first).
-   BEM naming. Mobile-first; breakpoints: 48em (768px), 64em (1024px).
+   BEM naming. Mobile-first: the base layout IS the mobile layout.
+   Breakpoints 48em (768px) and 64em (1024px), plus one deliberate
+   max-width: 63.99em (news panel image order). em, not px, so they
+   scale with the user's font size and with data-a11y-textsize.
+   Every layout must work at 320px wide - WCAG 2.2 SC 1.4.10 Reflow.
 
    ORGANISATION (atomic design; order also satisfies the cascade - a
    molecule may override an atom it contains, so atoms must come first):
@@ -427,7 +431,16 @@ button { font: inherit; cursor: pointer; }
   /* Reserve underline space so the active accent doesn't shift layout. */
   border-bottom: 2px solid transparent;
 }
-.site-nav__link:hover { color: var(--color-interactive-hover); }
+/* Hover, press and keyboard focus share one treatment: darker navy text plus
+   the underline bar. Same family as rest (navy), never the teal family - see
+   code_conventions.md C.1. The current page (below) stays teal even when
+   hovered: aria-current is the stronger orientation signal, so it wins. */
+.site-nav__link:hover,
+.site-nav__link:active,
+.site-nav__link:focus-visible {
+  color: var(--color-brand-hover);
+  border-bottom-color: var(--color-brand-hover);
+}
 /* "page" = this exact page, "true" = a page inside this section. */
 .site-nav__link[aria-current] {
   color: var(--color-interactive);
@@ -437,18 +450,35 @@ button { font: inherit; cursor: pointer; }
 /* --- 5. Organisms: hero banner -------------------------------------------- */
 .hero {
   position: relative;
-  background-color: var(--color-bg-band);
+  background-color: var(--color-bg);
   background-image: var(--hero-texture);
   background-size: cover;
   background-position: center;
   background-blend-mode: var(--hero-texture-blend);
   overflow: hidden;
 }
+/* The hero owns its container grid instead of using .container, so that on
+   desktop the image can bleed through the right gutter to the viewport edge
+   while the text column still lines up with every other .container:
+
+     gutter | content | gap | media | gutter
+
+   Gutters are never narrower than --container-pad and share whatever is left
+   once the two inner tracks reach their half of --container-max. */
 .hero__inner {
   display: grid;
-  gap: var(--space-xl);
+  grid-template-columns:
+    minmax(var(--container-pad), 1fr)
+    minmax(0, calc((var(--container-max) - var(--space-3xl)) / 2))
+    var(--space-3xl)
+    minmax(0, calc((var(--container-max) - var(--space-3xl)) / 2))
+    minmax(var(--container-pad), 1fr);
+  row-gap: var(--space-xl);
   padding-block: var(--space-2xl) var(--space-3xl);
 }
+/* Stacked: text and image both fill the inner tracks, as .container would. */
+.hero__content,
+.hero__media { grid-column: 2 / 5; }
 .hero__intro { font-size: var(--text-lg-size); line-height: var(--text-lg-lh); max-width: 40rem; }
 .hero__title { margin-bottom: var(--space-lg); }
 .hero__ctas {
@@ -465,21 +495,30 @@ button { font: inherit; cursor: pointer; }
   border-radius: var(--radius);
 }
 @media (min-width: 64em) {
-  .hero__inner {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: var(--space-3xl);
-    padding-block: var(--space-3xl) 0;
+  .hero__inner { padding-block: var(--space-3xl); }
+  .hero__content { grid-column: 2; }
+  /* Full bleed to the right, and pinned vertically to the text column: top
+     edge on the heading's cap height, bottom edge on the CTA row. The row is
+     sized by the text alone (the image is absolutely positioned, so it adds
+     no height of its own), then the media box stretches to match it.
+
+     Cap-height offset: with the h1's own font-size and line-height applied
+     here, 1em and 1lh resolve exactly as they do on the heading. For Lexend
+     (ascent 1.0em, descent 0.25em, cap height 0.7em) the cap top sits
+     (line-height / 2) - 0.325em below the line box top: 0.3em at the default
+     1.25 line-height, and still correct when the text-spacing preference
+     raises the line-height. */
+  .hero__media {
+    grid-column: 4 / -1;
+    align-self: stretch;
+    font-size: var(--text-h1-size);
+    line-height: var(--text-h1-lh);
+    margin-top: calc(0.5lh - 0.325em);
   }
-  .hero__media { align-self: end; }
   .hero__image {
+    position: absolute;
+    inset: 0;
     border-radius: 0;
-    /* Angled top edge from the Figma mask, kept as an exported asset. */
-    -webkit-mask-image: url("../img/hero-mask.svg");
-    mask-image: url("../img/hero-mask.svg");
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-    aspect-ratio: 624 / 580;
   }
 }
 

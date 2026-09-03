@@ -48,6 +48,10 @@
     var panel = root.querySelector("[data-a11y-panel]");
     var prefs = loadPrefs();
 
+    /* The button is hidden in the template so that a no-JS page never shows a
+       control that does nothing when clicked. JS is running, so reveal it. */
+    button.hidden = false;
+
     /* Reflect stored preferences in the controls. */
     root.querySelectorAll("input[name='textsize']").forEach(function (radio) {
       radio.checked = radio.value === (prefs.textsize || "");

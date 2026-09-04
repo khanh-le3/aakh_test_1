@@ -5,10 +5,10 @@
     <div class="container header__top">
         <a class="header__logo-link" href="{% pageurl current_site.root_page %}">
             <img class="header__logo"
-                 src="{% static 'img/logo-aakh-colour-transparent.png' %}"
+                 src="{% static 'img/logo-aakh-white.png' %}"
                  alt="Australian Autism Knowledge Hub - home">
         </a>
-        <form class="search-form" role="search" action="{% url 'search' %}" method="get">
+        <form class="search-form section--dark" role="search" action="{% url 'search' %}" method="get">
             <div class="search-form__field">
                 {% icon "search" %}
                 <label class="visually-hidden" for="site-search">Search the site</label>
@@ -39,7 +39,7 @@
 
         <div class="a11y-options" data-a11y-options>
             {# Hidden until aakh.js reveals it: without JS this button would do nothing. #}
-            <button class="btn btn--secondary btn--small" type="button"
+            <button class="btn btn--secondary btn--small section--dark" type="button"
                     data-a11y-toggle aria-expanded="false" aria-controls="a11y-panel" hidden>
                 Accessibility options
                 {% icon "accessibility" %}

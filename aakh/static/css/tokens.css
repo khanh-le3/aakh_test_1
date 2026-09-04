@@ -36,44 +36,41 @@
   --aakh-navy-900:   #032059;  /* brand 1                             */
   --aakh-teal-800:   #07493d;  /* interaction hover/active (b2 + 40%) */
   --aakh-teal-600:   #0b7a66;  /* brand 2 / interaction               */
+  --aakh-teal-400:   #4cb29a;  /* brand 2 / interaction  on dark      */
   --aakh-gold-400:   #c9a227;  /* brand 3 wattle - decorative on light*/
-  --aakh-ivory-300:  #c6c4c0;  /* background dark (ivory + 5% black)  */
+  --aakh-ivory-100:  #e3dbcb;  /* background darker  */
+  --aakh-ivory-75:   #ebe5d8;  /* background dark  */
   --aakh-ivory-50:   #f7f5f0;  /* background                          */
-  --aakh-ivory-25:   #fefefd;  /* background light (ivory + 70% white)*/
   --aakh-white:      #fdfdfc;  /* text on dark fills, interaction text*/
-  --aakh-black:      #000000;  /* card top accent                     */
-  --aakh-grey-900:   #333841;  /* border dark (background + 90% black)*/
-  --aakh-grey-700:   #636260;  /* border                              */
-  --aakh-grey-400:   #b9b8b4;  /* border light (background + 25%)     */
-  --aakh-acami-blue: #5979ff;  /* ACAMI brand mark (footer colophon)  */
+  --aakh-black:      #000000;  /*  */
+  --aakh-grey-800:   #34373e;  /* body text    */
+  --aakh-grey-500:   #776F61;  /* border                              */
+  --aakh-purple-400:  #8b5cd7;  /* focus                      */
 
   /* ----- 2. Semantic: colour ----- */
   --color-bg: var(--aakh-ivory-50);
-  --color-bg-band: var(--aakh-ivory-300);        /* header / banded sections */
-  --color-bg-raised: var(--aakh-ivory-25);       /* cards, inputs */
-  --color-bg-emphasis: var(--aakh-navy-900);     /* tags, dark panels */
   --color-heading: var(--aakh-navy-950);
-  --color-text: var(--aakh-grey-900);
-  --color-text-on-emphasis: var(--aakh-white);   /* text on bg-emphasis / interactive fills */
+  --color-text: var(--aakh-grey-800);
+  --color-text-secondary: var(--aakh-grey-500);
+  --color-text-on-emphasis: var(--aakh-white);  
   --color-brand: var(--aakh-navy-900);
-  --color-brand-hover: var(--aakh-teal-600);   /* nav hover/active: 17.8:1 on ivory */
-  --color-interactive: var(--aakh-teal-600);     /* links, buttons, active nav */
+  --color-brand-hover: var(--aakh-teal-600);   
+  --color-interactive: var(--aakh-teal-600);   
+  --color-interactive-on-dark: var(--aakh-teal-400);  
   --color-interactive-hover: var(--aakh-teal-800);
-  --color-accent: var(--aakh-gold-400);          /* decorative accents only */
-  --color-card-accent: var(--aakh-black);
-  --color-border: var(--aakh-grey-400);          /* decorative hairlines */
-  --color-border-input: var(--aakh-grey-700);    /* functional: 5.6:1 */
-  --color-focus: var(--aakh-navy-900);           /* focus ring: 14:1 on ivory */
-  --color-logo-acami: var(--aakh-acami-blue);
+  --color-accent: var(--aakh-gold-400);        
+  --color-card-accent: var(--aakh-navy-900);
+  --color-input-bg: var(--aakh-ivory-50);
+  --color-input-border: var(--aakh-grey-800);
+  --color-input-border-on-dark: var(--color-input-bg);
+  --color-border: var(--aakh-grey-500);            
+  --color-border-input-on-dark: var(--aakh-ivory-50);   
+  --color-focus: var(--aakh-purple-400);          
   /* Partner/brand logos are raster art tuned for light backgrounds. Dark or
      high-contrast schemes set a plate colour + padding and every logo gets a
      legible backing without touching component CSS or templates. */
   --color-logo-plate: transparent;
   --logo-plate-pad: 0px;
-  /* Hero banner texture is tuned for the light scheme; other schemes can set
-     --hero-texture: none or change the blend without touching .hero. */
-  --hero-texture: url("../img/texture-uluru.png");
-  --hero-texture-blend: screen;
 
   /* ----- 2. Semantic: typography -----
      Sizes in rem so the text-size preference scales everything.

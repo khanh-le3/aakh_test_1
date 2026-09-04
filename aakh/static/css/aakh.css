@@ -207,14 +207,14 @@ button { font: inherit; cursor: pointer; }
   width: 100%;
   height: var(--control-height);
   padding-inline: var(--space-md);
-  border: 1px solid var(--color-border-input);
+  border: 1px solid var(--color-input-border);
   border-radius: var(--radius);
-  background: var(--color-bg-raised);
+  background: var(--color-input-bg);
   color: var(--color-text);
   font: inherit;
   line-height: var(--text-body-lh);
 }
-.input::placeholder { color: var(--color-border-input); opacity: 1; }
+.input::placeholder { color: var(--color-text-secondary); opacity: 1; }
 
 /* --- 4. Molecules: search form -------------------------------------------- */
 .search-form {
@@ -234,13 +234,14 @@ button { font: inherit; cursor: pointer; }
 .search-form__field .icon {
   position: absolute;
   left: var(--space-md);
-  color: var(--color-brand);
+  color: var(--color-text-secondary);
   pointer-events: none;
 }
 .search-form__input {
   align-self: stretch;     /* the field is centred for the icon; the input fills it */
   /* Clear the inlaid icon: inset + icon + gap. */
   padding-left: calc(var(--space-md) + var(--icon-size) + var(--space-sm));
+  /* border-color: var(--color-border-input); */
   border-start-end-radius: 0;
   border-end-end-radius: 0;
 }
@@ -369,7 +370,7 @@ button { font: inherit; cursor: pointer; }
 
 /* --- 5. Organisms: header ------------------------------------------------- */
 .header {
-  background: var(--color-bg);
+  background: var(--color-brand);
 }
 .header__top {
   display: flex;
@@ -398,7 +399,7 @@ button { font: inherit; cursor: pointer; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--color-bg);
+  background: var(--color-brand);
   border-bottom: 1px solid var(--color-border);
 }
 .site-nav__inner {
@@ -422,7 +423,7 @@ button { font: inherit; cursor: pointer; }
   display: inline-flex;
   align-items: center;
   gap: var(--space-2xs);
-  color: var(--color-brand);
+  color: var(--color-text-on-emphasis);
   font-weight: 600;
   font-size: var(--text-label-size);
   line-height: var(--text-label-lh);
@@ -489,35 +490,22 @@ button { font: inherit; cursor: pointer; }
 }
 .hero__media { position: relative; }
 .hero__image {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   border-radius: var(--radius);
 }
 @media (min-width: 64em) {
-  .hero__inner { padding-block: var(--space-3xl); }
+  .hero__inner { padding-block: var(--space-2xl); }
   .hero__content { grid-column: 2; }
-  /* Full bleed to the right, and pinned vertically to the text column: top
-     edge on the heading's cap height, bottom edge on the CTA row. The row is
-     sized by the text alone (the image is absolutely positioned, so it adds
-     no height of its own), then the media box stretches to match it.
-
-     Cap-height offset: with the h1's own font-size and line-height applied
-     here, 1em and 1lh resolve exactly as they do on the heading. For Lexend
-     (ascent 1.0em, descent 0.25em, cap height 0.7em) the cap top sits
-     (line-height / 2) - 0.325em below the line box top: 0.3em at the default
-     1.25 line-height, and still correct when the text-spacing preference
-     raises the line-height. */
+  /* The media remains in normal grid flow so its intrinsic aspect ratio sets
+     its own height. It is vertically centred independently of the text while
+     still bleeding to the right without being clipped. */
   .hero__media {
     grid-column: 4 / -1;
-    align-self: stretch;
-    font-size: var(--text-h1-size);
-    line-height: var(--text-h1-lh);
-    margin-top: calc(0.5lh - 0.325em);
+    align-self: center;
   }
   .hero__image {
-    position: absolute;
-    inset: 0;
     border-radius: 0;
   }
 }
@@ -525,6 +513,10 @@ button { font: inherit; cursor: pointer; }
 /* --- 5. Organisms: page sections ------------------------------------------ */
 .section { padding-block: var(--space-section); }
 .section--band { background: var(--color-bg-band); }
+.section--dark {
+  --color-interactive: var(--color-interactive-on-dark);
+  --color-input-border: var(--color-input-border-on-dark);
+}
 .section__header {
   display: flex;
   flex-wrap: wrap;
@@ -653,4 +645,4 @@ button { font: inherit; cursor: pointer; }
   font-size: var(--text-sm-size);
   line-height: var(--text-sm-lh);
 }
-.footer__acami { width: 16rem; color: var(--color-logo-acami); }
+.footer__acami { width: 16rem; }

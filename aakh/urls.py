@@ -19,6 +19,18 @@ urlpatterns = [
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    from django.views.generic import TemplateView
+
+    # Frontend-only preview; the Knowledge Library has no Wagtail model yet.
+    urlpatterns += [
+        path(
+            "knowledge-library/",
+            TemplateView.as_view(
+                template_name="knowledge_library/knowledge_library_page.html"
+            ),
+            name="knowledge_library_preview",
+        ),
+    ]
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()

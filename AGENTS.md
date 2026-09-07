@@ -144,6 +144,12 @@ reports. Not yet confirmed.
 - Civic Theme roles: primary navy `#032059`, secondary teal `#0B7A66`, accent gold `#C9A227`, background ivory
   `#F7F5F0`. Accessibility overrides any unsuitable Civic Theme component.
 
+- Prefer CSS over JavaScript for layout and responsive presentation.
+- Avoid fixed viewport-dependent pixel positioning.
+- Reuse existing breakpoints/tokens where available.
+- Do not introduce dependencies just for small visual effects.
+- Do not modify unrelated UI when implementing a scoped design task.
+
 ### JavaScript and progressive enhancement
 
 WCAG 2.2 does not require no-JS operation. However, any custom UI component, widget, or interaction built with JavaScript must support keyboard navigation and work with assistive tech. 
@@ -155,3 +161,11 @@ Common JavaScript accessibility risks to avoid:
 ### TechStack 
 Wagtail CMS is used
 Hosting has not yet been decided, but Google Cloud Run is being considered. We will use Postgres 16 as the database.
+
+### Validation
+
+Before finishing a frontend task:
+- run existing lint/test/format commands
+- check responsive behaviour
+- check for horizontal overflow
+- report changed files and remaining visual differences

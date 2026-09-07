@@ -10,7 +10,10 @@
                 <ul class="footer__links">
                     {% for item in menu_items %}
                     <li>
-                        <a href="{{ item.path }}">{% icon item.icon %}{{ item.label }}</a>
+                        <a class="nav-link" href="{{ item.path }}"
+                           {% if item.aria_current %}aria-current="{{ item.aria_current }}"{% endif %}>
+                            {% icon item.icon %}{{ item.label }}
+                        </a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -20,17 +23,17 @@
                 <h2 class="footer__heading">Connect with us</h2>
                 {# TODO: replace # with the Hub's real social profile URLs once created. #}
                 <ul class="footer__links">
-                    <li><a href="#">{% icon "contact" %}Contact us</a></li>
-                    <li><a href="#">{% icon "linkedin" %}LinkedIn</a></li>
-                    <li><a href="#">{% icon "youtube" %}YouTube</a></li>
-                    <li><a href="#">{% icon "facebook" %}Facebook</a></li>
-                    <li><a href="#">{% icon "bluesky" %}Bluesky</a></li>
+                    <li><a class="nav-link" href="#">{% icon "contact" %}Contact us</a></li>
+                    <li><a class="nav-link" href="#">{% icon "linkedin" %}LinkedIn</a></li>
+                    <li><a class="nav-link" href="#">{% icon "youtube" %}YouTube</a></li>
+                    <li><a class="nav-link" href="#">{% icon "facebook" %}Facebook</a></li>
+                    <li><a class="nav-link" href="#">{% icon "bluesky" %}Bluesky</a></li>
                 </ul>
             </nav>
 
             <div class="footer__brand">
-                <img class="footer__brand-logo" src="{% static 'img/logo-aakh.png' %}"
-                     alt="Australian Autism Knowledge Hub" width="427" height="143">
+                <img class="footer__brand-logo" src="{% static 'img/logo-aakh-colour-transparent.png' %}"
+                     alt="Australian Autism Knowledge Hub" width="491" height="107">
                 {% comment %}TODO: enable once a newsletter service is chosen (form currently has no backend).
                 <form class="subscribe-form" method="post" action="">
                     <h2 class="subscribe-form__heading">Subscribe to receive latest news from the Australian Autism Knowledge Hub</h2>
@@ -86,11 +89,11 @@
         <div class="footer__legal">
             {# TODO: create these pages (GenericPage) and link them via the page tree. #}
             <ul class="footer__legal-links">
-                <li><a href="/copyright/">Copyright</a></li>
-                <li><a href="/disclaimer/">Disclaimer</a></li>
-                <li><a href="/privacy/">Privacy</a></li>
-                <li><a href="/accessibility-statement/">Accessibility statement</a></li>
-                <li><a href="/sitemap/">Sitemap</a></li>
+                <li><a class="nav-link" href="/copyright/">Copyright</a></li>
+                <li><a class="nav-link" href="/disclaimer/">Disclaimer</a></li>
+                <li><a class="nav-link" href="/privacy/">Privacy</a></li>
+                <li><a class="nav-link" href="/accessibility-statement/">Accessibility statement</a></li>
+                <li><a class="nav-link" href="/sitemap/">Sitemap</a></li>
             </ul>
             <div class="footer__colophon">
                 <p>&copy; Copyright Australian Autism Knowledge Hub</p>

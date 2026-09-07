@@ -8,14 +8,15 @@
                  src="{% static 'img/logo-aakh-white.png' %}"
                  alt="Australian Autism Knowledge Hub - home">
         </a>
-        <form class="search-form section--dark" role="search" action="{% url 'search' %}" method="get">
+        <form class="search-form search-form--on-dark header__search" role="search"
+              aria-label="Search the site" action="{% url 'search' %}" method="get">
             <div class="search-form__field">
                 {% icon "search" %}
                 <label class="visually-hidden" for="site-search">Search the site</label>
                 <input class="input search-form__input" type="search" id="site-search"
                        name="query" placeholder="Search the site">
             </div>
-            <button class="btn btn--primary btn--field search-form__submit" type="submit">Search</button>
+            <button class="btn btn--on-dark btn--field search-form__submit" type="submit">Search</button>
         </form>
     </div>
 </header>
@@ -28,7 +29,7 @@
         <ul class="site-nav__list">
             {% for item in menu_items %}
             <li>
-                <a class="site-nav__link" href="{{ item.path }}"
+                <a class="nav-link nav-link--on-dark" href="{{ item.path }}"
                    {% if item.aria_current %}aria-current="{{ item.aria_current }}"{% endif %}>
                     {% icon item.icon %}
                     {{ item.label }}
@@ -39,7 +40,7 @@
 
         <div class="a11y-options" data-a11y-options>
             {# Hidden until aakh.js reveals it: without JS this button would do nothing. #}
-            <button class="btn btn--secondary btn--small section--dark" type="button"
+            <button class="btn btn--on-dark btn--small" type="button"
                     data-a11y-toggle aria-expanded="false" aria-controls="a11y-panel" hidden>
                 Accessibility options
                 {% icon "accessibility" %}

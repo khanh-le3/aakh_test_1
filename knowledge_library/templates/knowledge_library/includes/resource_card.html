@@ -1,0 +1,18 @@
+{% load aakh_tags %}
+<li class="card card--resource">
+    <div class="card__body">
+        <h3 class="card__title"><a href="/knowledge-library/resources/{{ slug }}/">{{ title }}</a></h3>
+        {% if topic %}
+        <ul class="tag-list card__topics" role="list" aria-label="Topic"><li class="tag">{{ topic }}</li></ul>
+        {% endif %}
+        <p class="card__summary">{{ summary }}</p>
+    </div>
+    <div class="card__details">
+        <dl class="card__metadata">
+            <div><dt>Type</dt><dd>{{ type }}</dd></div>
+            <div><dt>Read time</dt><dd>18 minutes</dd></div>
+            <div><dt>Reviewed</dt><dd><time datetime="2026-12">December 2026</time></dd></div>
+        </dl>
+        <span class="nav-link card__read-more" aria-hidden="true">Read more {% icon "arrow-right" %}</span>
+    </div>
+</li>

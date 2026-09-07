@@ -44,8 +44,6 @@ class LinkedCardMixin(models.Model):
 class HomePage(Page):
     """The site home page: hero, featured resources, news and updates.
 
-    See .claude/rules/information_architecture.md section B.3.1.
-
     The featured-resource and news cards are editor-curated for now. Once the
     Knowledge library (AssetPage) and News (NewsPage) apps exist, these become
     querysets over real pages and the card fields below are retired; the
@@ -57,11 +55,23 @@ class HomePage(Page):
 
     # --- Hero ---
     hero_heading = models.CharField(
+        "heading first line",
         max_length=120,
         default="Autism research you can use",
-        help_text="The main headline. Keep it short and plain.",
+        help_text="The start of the main headline, shown in the primary brand colour.",
     )
-    hero_intro = RichTextField(
+    hero_heading_line_2 = models.CharField(
+        "heading second line",
+        max_length=120,
+        blank=True,
+        default="",
+        help_text=(
+            "Optional continuation, shown on a new line in the secondary brand colour. "
+            "Both parts may wrap further on small screens."
+        ),
+    )
+    # Pylance's Django TextField.__new__ stubs omit Wagtail's valid features kwarg.
+    hero_intro = RichTextField(  # pyright: ignore[reportCallIssue]
         features=["bold", "italic", "link"],
         blank=True,
         help_text="One or two short paragraphs welcoming visitors.",
@@ -111,6 +121,7 @@ class HomePage(Page):
         MultiFieldPanel(
             [
                 FieldPanel("hero_heading"),
+                FieldPanel("hero_heading_line_2"),
                 FieldPanel("hero_intro"),
                 FieldPanel("hero_image"),
                 FieldPanel("hero_cta_primary_label"),

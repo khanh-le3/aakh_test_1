@@ -29,6 +29,7 @@ load_dotenv(BASE_DIR / ".env")
 INSTALLED_APPS = [
     "core",
     "home",
+    "knowledge_library",
     "search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",

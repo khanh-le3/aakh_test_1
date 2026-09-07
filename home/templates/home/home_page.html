@@ -1,37 +1,47 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags aakh_tags %}
-
-{% block body_class %}template-homepage{% endblock %}
+{% load static wagtailcore_tags wagtailimages_tags aakh_tags %}
 
 {% block content %}
 
 {# --- Hero ------------------------------------------------------------- #}
-<section class="hero" aria-labelledby="hero-heading">
+<section class="hero hero--home" aria-labelledby="hero-heading">
     <div class="hero__inner">
         <div class="hero__content">
-            <h1 class="hero__title" id="hero-heading">{{ page.hero_heading }}</h1>
+            <p class="hero__eyebrow">Trusted research. Real-world change.</p>
+            <h1 class="hero__title" id="hero-heading">
+                <span class="hero__title-line hero__title-line--primary">{{ page.hero_heading }}</span>
+                {% if page.hero_heading_line_2 %}
+                <span class="hero__title-line hero__title-line--secondary">{{ page.hero_heading_line_2 }}</span>
+                {% endif %}
+            </h1>
             <div class="hero__intro">{{ page.hero_intro|richtext }}</div>
             <div class="hero__ctas">
                 {% if page.hero_cta_primary_page %}
-                <a class="btn btn--primary" href="{% pageurl page.hero_cta_primary_page %}">
-                    {{ page.hero_cta_primary_label }}
+                <a class="btn btn--primary hero__cta" href="{% pageurl page.hero_cta_primary_page %}">
+                    <span class="hero__cta-label">{{ page.hero_cta_primary_label }}</span>
+                    {% icon "arrow-right" %}
                 </a>
                 {% endif %}
                 {% if page.hero_cta_secondary_page %}
-                <a class="btn btn--secondary" href="{% pageurl page.hero_cta_secondary_page %}">
-                    {{ page.hero_cta_secondary_label }}
+                <a class="btn btn--secondary hero__cta" href="{% pageurl page.hero_cta_secondary_page %}">
+                    <span class="hero__cta-label">{{ page.hero_cta_secondary_label }}</span>
                 </a>
                 {% endif %}
             </div>
+            <div class="hero__attribution">
+                <p class="hero__attribution-label">A national initiative from</p>
+                <a class="hero__attribution-link" href="https://www.latrobe.edu.au/otarc"
+                   target="_blank" rel="noopener" title="Opens in a new tab">
+                    <img class="hero__attribution-logo" src="{% static 'img/logo-ltu-otarc.png' %}"
+                         width="969" height="146"
+                         alt="La Trobe University and the Olga Tennison Autism Research Centre">
+                    <span class="visually-hidden"> (opens in a new tab)</span>
+                </a>
+            </div>
         </div>
-        {% if page.hero_image %}
         <div class="hero__media">
-            {% image page.hero_image width-1250 as hero_img %}
-            <img class="hero__image" src="{{ hero_img.url }}"
-                 width="{{ hero_img.width }}" height="{{ hero_img.height }}"
-                 alt="{{ hero_img.alt }}">
+            {% include "includes/hero_visual.html" %}
         </div>
-        {% endif %}
     </div>
 </section>
 
@@ -79,7 +89,7 @@
                             <p>{{ slide.summary }}</p>
                             <a class="btn btn--primary" href="{{ slide.url }}">
                                 {{ slide.cta_label }}
-                                {% icon "arrow-right-24" %}
+                                {% icon "arrow-right" %}
                                 <span class="visually-hidden">: {{ slide.title }}</span>
                             </a>
                         </div>
@@ -103,7 +113,7 @@
                     </button>
                     <button class="btn btn--secondary" type="button" data-carousel-next>
                         Next
-                        {% icon "arrow-right-24" %}
+                        {% icon "arrow-right" %}
                     </button>
                 </div>
                 <p class="carousel__status" data-carousel-status role="status"></p>

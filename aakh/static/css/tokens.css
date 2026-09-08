@@ -36,6 +36,7 @@
   /* ----- 1. Primitives ----- */
   --aakh-navy-950:   #010d24;  /* headings, brand hover (b1 + 60% blk)*/
   --aakh-navy-900:   #032059;  /* brand 1                             */
+  --aakh-navy-100:   #d8dce4;  /* pale brand navy for summary icon    */
   --aakh-teal-800:   #07493d;  /* interaction hover/active (b2 + 40%) */
   --aakh-teal-600:   #0b7a66;  /* brand 2 / interaction               */
   --aakh-teal-400:   #4cb29a;  /* brand 2 / interaction  on dark      */
@@ -74,6 +75,8 @@
   --color-accent: var(--aakh-gold-400);
   --color-accent-card: var(--aakh-navy-900);
   /* Links */
+  --color-breadcrumb-link: var(--aakh-navy-900);
+  --color-breadcrumb-link-hover: var(--aakh-teal-600);
   --color-interactive: var(--aakh-teal-600);
   --color-interactive-hover: var(--aakh-teal-800);
   --color-nav-link: var(--aakh-teal-600);
@@ -111,7 +114,7 @@
   --color-hero-circle: var(--aakh-mint-300);
   --color-hero-gold-highlight: var(--aakh-gold-300);
   --color-hero-summary-border: var(--aakh-mint-100);
-  --color-hero-icon-people: var(--aakh-mint-200);
+  --color-hero-icon-summary: var(--aakh-navy-100);
   --color-hero-icon-lightbulb: var(--aakh-gold-100);
   --color-hero-icon-leaf: var(--aakh-green-100);
 
@@ -156,6 +159,7 @@
   --container-max: 78rem;                              /* 1248px grid */
   --container-pad: clamp(1rem, 0.15rem + 4.25vw, 3rem); /* 16 -> 48px gutters */
   --grid-gap: 1.5rem;                                  /* 24px gutter */
+  --icon-size: 1.25em;                    /* inherits; scales with local text */
   /* Height of a single-line form control (text input, and any button sitting
      on the same row as one). One value so every field on the site matches,
      wherever it appears */

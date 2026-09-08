@@ -45,7 +45,7 @@ deterministic lock
 - Wagtail docs: `docs/vendor/wagtail-doc-llms-full.md`; search them with `rg`, never load all ~60,000 lines.
 
 ## Accessibility (non-negotiable)
-
+Follow ARIA Authoring Practices Guide (APG) https://www.w3.org/WAI/ARIA/apg/
 Meet WCAG 2.2 AA and cognitive-accessibility needs. The no-preference, no-JS baseline must itself conform.
 
 - Make all interactions keyboard-operable (Tab, Enter, and arrows as appropriate), expose correct accessible

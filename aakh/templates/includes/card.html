@@ -1,0 +1,41 @@
+{% load aakh_tags %}
+{% comment %}
+Resource card (molecule). Rendered inside a <ul class="card-grid">.
+
+Context contract - `card` must provide:
+  type_label         short kind label, e.g. "Guideline"
+  title              card heading
+  url                link target (whole card is clickable)
+  summary            one or two plain-language sentences
+  read_time_minutes  optional integer
+  topics             optional list of topic label strings
+
+Used by the home page's editor-curated featured cards today; asset
+listing pages reuse it once AssetPage exists (same contract, real data).
+{% endcomment %}
+<li class="card">
+    <div class="card__body">
+        <div class="card__header">
+            <span class="card__type">{{ card.type_label }}</span>
+            {% if card.read_time_minutes %}
+            <span class="meta">{{ card.read_time_minutes }} minute read</span>
+            {% endif %}
+        </div>
+        <h3 class="card__title">
+            <a href="{{ card.url }}">{{ card.title }}</a>
+        </h3>
+        <p class="card__summary">{{ card.summary }}</p>
+        <div class="card__footer">
+            {% if card.topics %}
+            <ul class="tag-list">
+                {% for topic in card.topics %}
+                <li class="tag">{{ topic }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <span></span>
+            {% endif %}
+            {% icon "arrow-right" %}
+        </div>
+    </div>
+</li>

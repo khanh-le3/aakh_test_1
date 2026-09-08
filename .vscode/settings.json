@@ -1,0 +1,10 @@
+{
+  // Default to this project's virtualenv so imports match its dependencies.
+  "python.defaultInterpreterPath": "${workspaceFolder}/env/bin/python",
+  "python.analysis.extraPaths": ["${workspaceFolder}"],
+
+  // Keep basic type checking enabled. Pylance also bundles Django stubs;
+  // these can flag valid Wagtail kwargs even with the correct interpreter.
+  // Suppress confirmed stub mismatches narrowly at the affected call site.
+  "python.analysis.typeCheckingMode": "basic"
+}

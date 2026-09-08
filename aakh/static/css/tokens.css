@@ -1,0 +1,246 @@
+/* ==========================================================================
+   AAKH design tokens
+   --------------------------------------------------------------------------
+   Source of truth: Figma "AAKH- Website" + .claude/rules/design_system.md
+   (CivicTheme adapted: navy #032059, teal #0B7A66, gold #C9A227, ivory #F7F5F0).
+
+   Three layers:
+     1. Primitives  (--aakh-*)  raw palette values. Never used by components.
+     2. Semantic    (--color-*, --text-*, --space-*, ...) roles. Components
+        consume ONLY these, so a palette change is a one-file edit.
+     3. Preference overrides (html[data-a11y-*]) driven by the
+        "Accessibility options" panel. Every component responds automatically
+        because everything is expressed in rem + semantic tokens.
+
+   Contrast notes (WCAG 2.2 AA):
+     - teal-600 on ivory-50 4.83:1; white on teal-600 5.17:1.
+     - white on navy 15.23:1; teal-400 on navy 6.01:1.
+     - teal-600 on ivory-75 4.19:1: use large, bold button labels there.
+     - Wattle gold (#C9A227) is 2.2:1 on ivory: DECORATIVE USE ONLY on light
+       backgrounds (accent bars). As text/icons it may only sit on navy (6.4:1).
+   ========================================================================== */
+
+/* --- Self-hosted Lexend (variable weight, latin) --- */
+@font-face {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/lexend-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ----- 1. Primitives ----- */
+  --aakh-navy-950:   #010d24;  /* headings, brand hover (b1 + 60% blk)*/
+  --aakh-navy-900:   #032059;  /* brand 1                             */
+  --aakh-navy-100:   #d8dce4;  /* pale brand navy for summary icon    */
+  --aakh-teal-800:   #07493d;  /* interaction hover/active (b2 + 40%) */
+  --aakh-teal-600:   #0b7a66;  /* brand 2 / interaction               */
+  --aakh-teal-400:   #4cb29a;  /* brand 2 / interaction  on dark      */
+  --aakh-mint-100:   #d6eae5;  /* research illustration field        */
+  --aakh-mint-200:   #c3e5db;  /* people icon disc                   */
+  --aakh-mint-300:   #acd5c9;  /* decorative teal circle             */
+  --aakh-gold-100:   #f2e2a5;  /* lightbulb icon disc                */
+  --aakh-gold-300:   #e2b638;  /* decorative gold highlight          */
+  --aakh-green-100:  #d9ebd2;  /* leaf icon disc                     */
+  --aakh-gold-400:   #c9a227;  /* brand 3 wattle - decorative on light*/
+  --aakh-ivory-100:  #e3dbcb;  /* background darker  */
+  --aakh-ivory-75:   #ebe5d8;  /* background dark  */
+  --aakh-ivory-50:   #f7f5f0;  /* background                          */
+  --aakh-white:      #fdfdfc;  /* text on dark fills, interaction text*/
+  --aakh-black:      #000000;  /*  */
+  --aakh-grey-800:   #34373e;  /* body text    */
+  --aakh-grey-500:   #776F61;  /* border                              */
+  --aakh-purple-400:  #8b5cd7;  /* focus                      */
+
+  /* ----- 2. Semantic: colour ----- */
+  --color-brand-primary: var(--aakh-navy-900);
+  --color-brand-secondary: var(--aakh-teal-600);
+  --color-brand-accent: var(--aakh-gold-400);
+  /* Surfaces: the muted surface is light ivory, not a dark control context. */
+  --color-bg: var(--aakh-ivory-50);
+  --color-bg-muted: var(--aakh-ivory-75);
+  --color-bg-raised: var(--aakh-white);
+  --color-bg-band: var(--aakh-ivory-50);
+  --color-bg-emphasis: var(--aakh-navy-900);
+  /* Text */
+  --color-heading: var(--aakh-navy-950);  /* heading */
+  --color-text: var(--aakh-grey-800); /* body text */
+  --color-text-secondary: var(--aakh-grey-500); /* secondary text - input placeholder */
+  --color-text-on-dark: var(--aakh-white);  /* text on dark fills */
+  /* Accents */
+  --color-accent: var(--aakh-gold-400);
+  --color-accent-card: var(--aakh-navy-900);
+  /* Links */
+  --color-breadcrumb-link: var(--aakh-navy-900);
+  --color-breadcrumb-link-hover: var(--aakh-teal-600);
+  --color-interactive: var(--aakh-teal-600);
+  --color-interactive-hover: var(--aakh-teal-800);
+  --color-nav-link: var(--aakh-teal-600);
+  --color-nav-link-hover: var(--aakh-teal-800);
+  --color-nav-link-on-dark: var(--aakh-white);
+  --color-nav-link-on-dark-hover: var(--aakh-teal-400);
+  /* Buttons: each variant owns its full rest / activated colour family.
+     Primary fill and border use the same token; outlined variants share
+     their label and border token. Hover also covers focus/press/selection. */
+  --color-btn-primary: var(--aakh-teal-600);
+  --color-btn-primary-hover: var(--aakh-teal-800);
+  --color-btn-primary-text: var(--aakh-white);
+  --color-btn-secondary: var(--aakh-teal-600);
+  --color-btn-secondary-hover: var(--aakh-teal-800);
+  --color-btn-secondary-bg: transparent;
+  --color-btn-secondary-bg-hover: var(--aakh-ivory-100);
+  --color-btn-on-dark: var(--aakh-white);
+  --color-btn-on-dark-hover: var(--aakh-teal-400);
+  --color-btn-on-dark-bg: transparent;
+  --color-btn-disabled: var(--aakh-grey-500);
+  /* Inputs and boundaries */
+  --color-input-bg: var(--aakh-ivory-50);
+  --color-input-border: var(--aakh-grey-800);
+  --color-input-border-on-dark: var(--aakh-white);
+  --color-border: var(--aakh-grey-500);
+  --color-focus: var(--aakh-purple-400);
+  /* Partner/brand logos are raster art tuned for light backgrounds. Dark or
+     high-contrast schemes set a plate colour + padding and every logo gets a
+     legible backing without touching component CSS or templates. */
+  --color-logo-plate: transparent;
+  --logo-plate-pad: 0px;
+  /* Research-to-summary illustration: all readable text uses existing roles.
+     Navy on mint is 12.37:1; navy on the icon discs exceeds 11:1. */
+  --color-hero-mint: var(--aakh-mint-100);
+  --color-hero-circle: var(--aakh-mint-300);
+  --color-hero-gold-highlight: var(--aakh-gold-300);
+  --color-hero-summary-border: var(--aakh-mint-100);
+  --color-hero-icon-summary: var(--aakh-navy-100);
+  --color-hero-icon-lightbulb: var(--aakh-gold-100);
+  --color-hero-icon-leaf: var(--aakh-green-100);
+
+  /* ----- 2. Semantic: typography -----
+     Sizes in rem so the text-size preference scales everything.
+     clamp() = mobile size -> Figma desktop size. Unitless line-height. */
+  --font-body: "Lexend", "Segoe UI", system-ui, sans-serif;
+  --text-hero-title-size: 4rem;
+  --text-h1-size: clamp(2rem, 1.55rem + 2vw, 3rem);          /* 32 -> 48px */
+  --text-h1-lh: 1.25;
+  --text-h1-ls: -0.02em;
+  --text-h2-size: clamp(1.75rem, 1.43rem + 1.4vw, 2.4375rem); /* 28 -> 39px */
+  --text-h2-lh: 1.23;
+  --text-h2-ls: -0.02em;
+  --text-h3-size: clamp(1.5rem, 1.28rem + 1vw, 2rem);         /* 24 -> 32px */
+  --text-h3-lh: 1.25;
+  --text-h3-ls: -0.019em;
+  --text-h4-size: clamp(1.25rem, 1.16rem + 0.4vw, 1.5625rem); /* 20 -> 25px */
+  --text-h4-lh: 1.24;
+  --text-h4-ls: -0.016em;
+  --text-lg-size: clamp(1.125rem, 1.07rem + 0.25vw, 1.25rem); /* 18 -> 20px */
+  --text-lg-lh: 1.7;
+  --text-body-size: 1rem;                                     /* 16px */
+  --text-body-lh: 1.75;
+  --text-sm-size: 0.875rem;                                   /* 14px */
+  --text-sm-lh: 1.78;
+  --text-label-size: 1rem;                    /* buttons, links, nav: 16/20 */
+  --text-label-lh: 1.25;
+  --text-label-lg-size: 1.25rem;              /* large buttons: 20px, bold */
+  --text-label-lg-lh: 1.33;
+
+  /* ----- 2. Semantic: spacing / layout ----- */
+  --space-2xs: 0.25rem;   /*  4px */
+  --space-xs: 0.5rem;     /*  8px */
+  --space-sm: 0.75rem;    /* 12px */
+  --space-md: 1rem;       /* 16px */
+  --space-lg: 1.5rem;     /* 24px */
+  --space-xl: 2rem;       /* 32px */
+  --space-2xl: 3rem;      /* 48px  (Figma Vertical Spacing M) */
+  --space-3xl: 4rem;      /* 64px */
+  --space-section: clamp(3rem, 2rem + 4vw, 6.25rem);  /* 48 -> 100px */
+  --container-max: 78rem;                              /* 1248px grid */
+  --container-pad: clamp(1rem, 0.15rem + 4.25vw, 3rem); /* 16 -> 48px gutters */
+  --grid-gap: 1.5rem;                                  /* 24px gutter */
+  --icon-size: 1.25em;                    /* inherits; scales with local text */
+  /* Height of a single-line form control (text input, and any button sitting
+     on the same row as one). One value so every field on the site matches,
+     wherever it appears */
+  --control-height: 3rem;                              /* 48px */
+
+  /* ----- 2. Semantic: shape / elevation / focus ----- */
+  --radius: 0.25rem;       /* 4px */
+  --radius-pill: 999px;
+  --radius-hero-summary: 0.75rem;
+  --shadow-hero-summary: 0 0.5rem 1.375rem rgba(3, 32, 89, 0.09);
+  --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.2);      /* Figma Elevation 2 */
+  --focus-ring: 3px solid var(--color-focus);
+  --focus-offset: 2px;
+  --transition: 150ms ease-out;
+
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   ADDING A COLOUR SCHEME (dark, high contrast, ...)
+   --------------------------------------------------------------------------
+   Contract: components (aakh.css) consume ONLY semantic tokens and never
+   introduce raw colours, so a new scheme is a single block here remapping
+   the semantic layer - no component or template edits. Pattern:
+
+     html[data-a11y-theme="dark"] {
+       --color-bg: <dark primitive>;
+       --color-text: ...;
+       --color-interactive: <lightened teal that passes AA on dark>;
+       --color-focus: var(--aakh-gold-400);   (gold passes on navy)
+       --color-logo-plate: var(--aakh-ivory-50);
+       --logo-plate-pad: 0.5rem;
+       --shadow-card: none;                   (prefer borders on dark)
+       color-scheme: dark;
+     }
+
+   Wire the toggle as another control in the accessibility options panel
+   (data-a11y-theme via the existing localStorage plumbing in aakh.js).
+   Re-check every remapped pair against WCAG 2.2 AA before shipping.
+   Windows High Contrast Mode (forced-colors) replaces rendered colours;
+   components carry border and outline fallbacks so boundaries survive it.
+   ========================================================================== */
+
+/* ==========================================================================
+   3. Accessibility preference overrides
+   Set as data attributes on <html> by the "Accessibility options" panel
+   (aakh.js) and applied before first paint by an inline script in base.html.
+   ========================================================================== */
+
+/* Text size: rem-based layout means bumping the root size scales the site. */
+html[data-a11y-textsize="lg"] { font-size: 115%; }
+html[data-a11y-textsize="xl"] { font-size: 130%; }
+
+/* Increased text spacing (WCAG 1.4.12 metrics). */
+html[data-a11y-spacing="on"] body {
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+}
+html[data-a11y-spacing="on"] body * {
+  letter-spacing: inherit !important;
+  line-height: 1.5 !important;
+}
+html[data-a11y-spacing="on"] p {
+  margin-block-end: 2em !important;
+}
+
+/* Reduced motion: honour both the OS setting and the site toggle. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html[data-a11y-motion="reduce"] *,
+html[data-a11y-motion="reduce"] *::before,
+html[data-a11y-motion="reduce"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}

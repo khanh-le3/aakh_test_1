@@ -1,0 +1,54 @@
+{% load static aakh_tags %}
+
+{# Editorial TODO: replace this illustrative, unverified summary with approved copy before release. #}
+<div class="hero-visual">
+    <div class="hero-visual__decoration" aria-hidden="true">
+        <div class="hero-visual__mint"></div>
+    </div>
+    <div class="hero-visual__scene">
+        <div class="hero-visual__evidence">
+            <p class="hero-visual__label hero-visual__label--evidence">From trusted<br>research evidence</p>
+            <div class="hero-visual__paper-wrap">
+                <img class="hero-visual__arrow hero-visual__arrow--evidence"
+                     src="{% static 'img/hero/arrow-evidence.svg' %}"
+                     width="78" height="74" alt="">
+                <img class="hero-visual__paper"
+                     src="{% static 'img/hero/research-paper.svg' %}"
+                     width="387" height="512" alt="">
+            </div>
+        </div>
+        <div class="hero-visual__understanding">
+            <div class="hero-visual__transition">
+                <div class="hero-visual__arrow-wrap" aria-hidden="true">
+                    <img class="hero-visual__arrow hero-visual__arrow--understanding"
+                         src="{% static 'img/hero/arrow-understanding.svg' %}"
+                         width="172" height="60" alt="">
+                </div>
+                <p class="hero-visual__label hero-visual__label--understanding">To clearer understanding and real-world change</p>
+            </div>
+            <div class="hero-visual__summary-wrap">
+                <div class="hero-visual__dots" aria-hidden="true"></div>
+                <div class="hero-visual__summary">
+                    <h2 class="hero-visual__summary-heading">Research snapshot</h2>
+                    <h3 class="hero-visual__headline">What helps autistic students prepare for life after secondary school?</h3>
+                    <ul class="hero-visual__explanations" role="list">
+                        <li class="hero-visual__row">
+                            <span class="hero-visual__icon-disc hero-visual__icon-disc--summary" aria-hidden="true">{% icon "file-text" %}</span>
+                            <p>Plain-language summary</p>
+                        </li>
+                        <li class="hero-visual__row">
+                            <span class="hero-visual__icon-disc hero-visual__icon-disc--findings" aria-hidden="true">{% icon "search" %}</span>
+                            <p>What the researchers found</p>
+                        </li>
+                        <li class="hero-visual__row">
+                            <span class="hero-visual__icon-disc hero-visual__icon-disc--everyday" aria-hidden="true">{% icon "home" %}</span>
+                            <p>What this means for you in everyday life</p>
+                        </li>
+                    </ul>
+                    <!-- <p>A successful transition is not about finding a single "right" pathway. It is about having the information, opportunities, and support needed to make informed choices about the future. </p> -->
+                    <!-- <p class="hero-visual__disclosure">Illustrative copy only</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,3 +1,7 @@
+media/
+# .claude/ IS committed (rules, CLAUDE.md). Only per-machine state stays out:
+.claude/settings.local.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

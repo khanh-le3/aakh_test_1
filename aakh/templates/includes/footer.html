@@ -1,0 +1,108 @@
+{% load static aakh_tags %}
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer__grid">
+            <nav aria-label="Quick links">
+                <h2 class="footer__heading">Quick links</h2>
+                {# Same fixed menu as the header; edit core/navigation.py. #}
+                {% main_menu as menu_items %}
+                <ul class="footer__links">
+                    {% for item in menu_items %}
+                    <li>
+                        <a class="nav-link" href="{{ item.path }}"
+                           {% if item.aria_current %}aria-current="{{ item.aria_current }}"{% endif %}>
+                            {% icon item.icon %}{{ item.label }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            <nav aria-label="Connect with us">
+                <h2 class="footer__heading">Connect with us</h2>
+                {# TODO: replace # with the Hub's real social profile URLs once created. #}
+                <ul class="footer__links">
+                    <li><a class="nav-link" href="#">{% icon "contact" %}Contact us</a></li>
+                    <li><a class="nav-link" href="#">{% icon "linkedin" %}LinkedIn</a></li>
+                    <li><a class="nav-link" href="#">{% icon "youtube" %}YouTube</a></li>
+                    <li><a class="nav-link" href="#">{% icon "facebook" %}Facebook</a></li>
+                    <li><a class="nav-link" href="#">{% icon "bluesky" %}Bluesky</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer__brand">
+                <img class="footer__brand-logo" src="{% static 'img/logo-aakh-colour-transparent.png' %}"
+                     alt="Australian Autism Knowledge Hub" width="491" height="107">
+                {% comment %}TODO: enable once a newsletter service is chosen (form currently has no backend).
+                <form class="subscribe-form" method="post" action="">
+                    <h2 class="subscribe-form__heading">Subscribe to receive latest news from the Australian Autism Knowledge Hub</h2>
+                    <div class="subscribe-form__row">
+                        <label class="visually-hidden" for="subscribe-email">Email address</label>
+                        <input class="input" type="email" id="subscribe-email" name="email"
+                               placeholder="Enter your email address" autocomplete="email">
+                        <button class="btn btn--secondary btn--field" type="submit">Subscribe</button>
+                    </div>
+                </form>
+                {% endcomment %}
+            </div>
+        </div>
+
+        <div class="footer__ack footer__ack--cols">
+            <div class="footer__ack-block">
+                <div class="footer__ack-logos">
+                    <img src="{% static 'img/logo-gov-health.png' %}"
+                         alt="Australian Government - Department of Health, Disability and Ageing">
+                </div>
+                <p>The Australian Autism Knowledge Hub is funded by the Department of Health, Disability, and Ageing.</p>
+            </div>
+            <div class="footer__ack-block">
+                <div class="footer__ack-logos">
+                    <img src="{% static 'img/logo-latrobe.jpg' %}" alt="La Trobe University">
+                    <img src="{% static 'img/logo-otarc.png' %}" alt="Olga Tennison Autism Research Centre">
+                </div>
+                <p>
+                    The Australian Autism Knowledge Hub is a part of The Olga Tennison Autism
+                    Research Centre at La Trobe University. For more information, visit
+                    <a href="https://www.latrobe.edu.au/otarc">the OTARC website</a>.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer__ack">
+            <div class="footer__country">
+                <div class="footer__flags">
+                    <img src="{% static 'img/flag-aboriginal.svg' %}" alt="Australian Aboriginal flag">
+                    <img src="{% static 'img/flag-torres-strait.svg' %}" alt="Torres Strait Islander flag">
+                    <img src="{% static 'img/flag-progress.svg' %}" alt="Progress Pride flag">
+                </div>
+                <p>
+                    We acknowledge that we work on the unceded lands of many traditional custodians
+                    in Victoria. We recognise their ongoing connection to the land and value their
+                    unique contribution to the university and wider Australian society. We pay our
+                    respects to their Elders, past and present, and thank them for their ongoing
+                    care of the land, skies and waterways of this beautiful country.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer__legal">
+            {# TODO: create these pages (GenericPage) and link them via the page tree. #}
+            <ul class="footer__legal-links">
+                <li><a class="nav-link" href="/copyright/">Copyright</a></li>
+                <li><a class="nav-link" href="/disclaimer/">Disclaimer</a></li>
+                <li><a class="nav-link" href="/privacy/">Privacy</a></li>
+                <li><a class="nav-link" href="/accessibility-statement/">Accessibility statement</a></li>
+                <li><a class="nav-link" href="/sitemap/">Sitemap</a></li>
+            </ul>
+            <div class="footer__colophon">
+                <p>&copy; Copyright Australian Autism Knowledge Hub</p>
+                <p>
+                    Website by the Australian Centre for Artificial Intelligence
+                    in Medical Innovation (ACAMI)
+                </p>
+                <img class="footer__acami" src="{% static 'img/logo-acami.svg' %}" alt="">
+            </div>
+        </div>
+    </div>
+</footer>

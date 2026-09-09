@@ -1,5 +1,5 @@
 {% load aakh_tags %}
-<li class="card card--topic card--topic-{{ card.topic_key }}">
+<li class="card card--topic card--topic-accent-{{ card.accent }}">
     <a class="card__body card__topic-link" href="{{ card.url }}" aria-labelledby="topic-{{ card.topic_key }}">
         <h3 class="card__title" id="topic-{{ card.topic_key }}">
             {% icon card.icon_name "card__topic-icon" %}

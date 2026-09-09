@@ -3,14 +3,20 @@
 from typing import TYPE_CHECKING
 
 from django.core.exceptions import ValidationError
-from django.core.paginator import Paginator
 from django.db import models
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.models import Orderable, Page
 
 from ..panels import TopicCardsPanel, validate_topic_keys
-from ..topics import BANNER_INTRO, ICON_CHOICES, TOPIC_CHOICES, TOPIC_COUNT, TOPICS_INTRO
+from ..topics import (
+    BANNER_INTRO,
+    ICON_CHOICES,
+    TOPIC_ACCENTS,
+    TOPIC_CHOICES,
+    TOPIC_COUNT,
+    TOPICS_INTRO,
+)
 
 if TYPE_CHECKING:
     from django.db.models import Manager
@@ -91,24 +97,14 @@ class KnowledgeLibraryPage(Page):
         from .resources import ResourcePage
 
         context = super().get_context(request, *args, **kwargs)
-        per_page = {"20": 20, "50": 50, "100": 100}.get(
-            request.GET.get("per_page", "20"), 20
-        )
-        recent_resources = (
+        context["recent_resources"] = (
             ResourcePage.objects.descendant_of(self)
             .live()
             .public()
             .select_related("primary_topic")
+            .prefetch_related("secondary_topics")
             .order_by("-first_published_at", "-pk")
-        )
-        paginator = Paginator(recent_resources, per_page)
-        recent_page = paginator.get_page(request.GET.get("page"))
-        context["recent_resources"] = recent_page
-        context["recent_per_page"] = per_page
-        context["recent_page_sizes"] = (20, 50, 100)
-        context["recent_page_range"] = list(
-            paginator.get_elided_page_range(recent_page.number, on_each_side=1, on_ends=1)
-        )
+        )[:10]
         return context
 
 
@@ -173,6 +169,11 @@ class TopicCard(Orderable):
             )
             if original_key is not None and original_key != self.topic_key:
                 raise ValidationError("A card's fixed topic cannot be changed.")
+
+    @property
+    def accent(self):
+        # Resolve at render time so an assignment change also applies to saved cards.
+        return TOPIC_ACCENTS[self.topic_key]
 
     @property
     def icon_name(self):

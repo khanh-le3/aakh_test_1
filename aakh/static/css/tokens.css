@@ -69,6 +69,19 @@
   --aakh-cocoa-600:      #805e49;
   --aakh-slate-600:      #5c6f7e;
   --aakh-mulberry-600:   #944d83;
+  /* Topic chip tints: 10% accent on white, precomputed for stable contrast. */
+  --aakh-plum-50:       #f0ecef;
+  --aakh-terracotta-50: #f4ece8;
+  --aakh-rose-50:       #f4ebee;
+  --aakh-sienna-50:     #f4ece6;
+  --aakh-olive-50:      #eeeee8;
+  --aakh-periwinkle-50: #eeeef4;
+  --aakh-brick-50:      #f4ebea;
+  --aakh-mauve-50:      #f2edee;
+  --aakh-violet-50:     #f0ecf3;
+  --aakh-cocoa-50:      #f1edea;
+  --aakh-slate-50:      #edefef;
+  --aakh-mulberry-50:   #f3ebf0;
 
   /* ----- 2. Semantic: colour ----- */
   --color-brand-primary: var(--aakh-navy-900);
@@ -90,20 +103,36 @@
   /* Accents */
   --color-accent: var(--aakh-gold-400);
   --color-accent-card: var(--aakh-navy-900);
-  /* Topic cards: icon accents supplement the written topic names.
+  /* Topic cards: stable accent slots, assigned in knowledge_library/topics.py.
+     Slot IDs are independent of topic names and display order.
+     Icon accents supplement the written topic names.
      All twelve icons exceed 3:1 on the resting and darker ivory surfaces. */
-  --color-topic-understanding: var(--aakh-plum-600);
-  --color-topic-diagnosis: var(--aakh-terracotta-600);
-  --color-topic-communication: var(--aakh-rose-600);
-  --color-topic-supports: var(--aakh-sienna-600);
-  --color-topic-education: var(--aakh-olive-600);
-  --color-topic-work: var(--aakh-periwinkle-600);
-  --color-topic-health: var(--aakh-brick-600);
-  --color-topic-wellbeing: var(--aakh-mauve-600);
-  --color-topic-relationships: var(--aakh-violet-600);
-  --color-topic-daily-life: var(--aakh-cocoa-600);
-  --color-topic-inclusion: var(--aakh-slate-600);
-  --color-topic-cross-cutting: var(--aakh-mulberry-600);
+  --color-topic-accent-01: var(--aakh-plum-600);
+  --color-topic-accent-02: var(--aakh-terracotta-600);
+  --color-topic-accent-03: var(--aakh-rose-600);
+  --color-topic-accent-04: var(--aakh-sienna-600);
+  --color-topic-accent-05: var(--aakh-olive-600);
+  --color-topic-accent-06: var(--aakh-periwinkle-600);
+  --color-topic-accent-07: var(--aakh-brick-600);
+  --color-topic-accent-08: var(--aakh-mauve-600);
+  --color-topic-accent-09: var(--aakh-violet-600);
+  --color-topic-accent-10: var(--aakh-cocoa-600);
+  --color-topic-accent-11: var(--aakh-slate-600);
+  --color-topic-accent-12: var(--aakh-mulberry-600);
+  /* Each accent exceeds 4.5:1 on its chip background. */
+  --color-topic-accent-01-muted: var(--aakh-plum-50);
+  --color-topic-accent-02-muted: var(--aakh-terracotta-50);
+  --color-topic-accent-03-muted: var(--aakh-rose-50);
+  --color-topic-accent-04-muted: var(--aakh-sienna-50);
+  --color-topic-accent-05-muted: var(--aakh-olive-50);
+  --color-topic-accent-06-muted: var(--aakh-periwinkle-50);
+  --color-topic-accent-07-muted: var(--aakh-brick-50);
+  --color-topic-accent-08-muted: var(--aakh-mauve-50);
+  --color-topic-accent-09-muted: var(--aakh-violet-50);
+  --color-topic-accent-10-muted: var(--aakh-cocoa-50);
+  --color-topic-accent-11-muted: var(--aakh-slate-50);
+  --color-topic-accent-12-muted: var(--aakh-mulberry-50);
+
   --color-topic-card-bg: var(--aakh-ivory-75);
   --color-topic-card-bg-hover: var(--aakh-ivory-100);
   --color-topic-card-heading: var(--color-heading);
@@ -113,6 +142,9 @@
   --color-breadcrumb-link-hover: var(--aakh-teal-600);
   --color-interactive: var(--aakh-teal-600);
   --color-interactive-hover: var(--aakh-teal-800);
+  --color-recent-card-bg: var(--aakh-ivory-50);
+  --color-recent-card-heading: var(--color-heading);
+  --color-recent-card-heading-hover: var(--color-interactive-hover);
   /* Resource banner links need stronger contrast on the darker hero ivory. */
   --color-resource-banner-link: var(--aakh-navy-900);
   --color-resource-banner-link-hover: var(--aakh-navy-950);
@@ -130,7 +162,7 @@
   --color-nav-link-hover: var(--aakh-teal-800);
   /* Footer ivory needs darker teal for normal-size links (8.61:1).
      Underlines provide the non-colour hover/pressed cue. */
-  --color-footer-link: var(--aakh-teal-800);
+  --color-footer-link: var(--aakh-teal-600);
   --color-footer-link-hover: var(--aakh-teal-800);
   --color-nav-link-on-dark: var(--aakh-white);
   --color-nav-link-on-dark-hover: var(--aakh-teal-400);

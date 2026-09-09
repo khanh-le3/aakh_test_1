@@ -181,6 +181,10 @@ Audio: Cloudflare R2
 Video: Cloudflare Stream
 Analytics: Self-hosted Umami
 
+Being considered:
+- https://github.com/vicktornl/wagtail-speech
+- https://wagtail-ai.readthedocs.io/latest/
+
 ### Validation
 
 Before finishing a frontend task:

@@ -293,6 +293,18 @@ button { font: inherit; cursor: pointer; }
   margin: 0;
   padding: 0;
 }
+.tag--topic-accent-01 { color: var(--color-topic-accent-01); background: var(--color-topic-accent-01-muted); }
+.tag--topic-accent-02 { color: var(--color-topic-accent-02); background: var(--color-topic-accent-02-muted); }
+.tag--topic-accent-03 { color: var(--color-topic-accent-03); background: var(--color-topic-accent-03-muted); }
+.tag--topic-accent-04 { color: var(--color-topic-accent-04); background: var(--color-topic-accent-04-muted); }
+.tag--topic-accent-05 { color: var(--color-topic-accent-05); background: var(--color-topic-accent-05-muted); }
+.tag--topic-accent-06 { color: var(--color-topic-accent-06); background: var(--color-topic-accent-06-muted); }
+.tag--topic-accent-07 { color: var(--color-topic-accent-07); background: var(--color-topic-accent-07-muted); }
+.tag--topic-accent-08 { color: var(--color-topic-accent-08); background: var(--color-topic-accent-08-muted); }
+.tag--topic-accent-09 { color: var(--color-topic-accent-09); background: var(--color-topic-accent-09-muted); }
+.tag--topic-accent-10 { color: var(--color-topic-accent-10); background: var(--color-topic-accent-10-muted); }
+.tag--topic-accent-11 { color: var(--color-topic-accent-11); background: var(--color-topic-accent-11-muted); }
+.tag--topic-accent-12 { color: var(--color-topic-accent-12); background: var(--color-topic-accent-12-muted); }
 .meta { color: var(--color-text); font-size: var(--text-sm-size); line-height: var(--text-sm-lh); }
 
 /* --- 3. Atoms: form controls ---------------------------------------------- */
@@ -623,18 +635,19 @@ button { font: inherit; cursor: pointer; }
   background: var(--color-topic-card-bg);
   border: 1px solid var(--color-border);
 }
-.card--topic-understanding-autism { --color-topic-icon: var(--color-topic-understanding); }
-.card--topic-diagnosis-and-assessment { --color-topic-icon: var(--color-topic-diagnosis); }
-.card--topic-communication-sensory-and-movement { --color-topic-icon: var(--color-topic-communication); }
-.card--topic-therapies-supports-and-services { --color-topic-icon: var(--color-topic-supports); }
-.card--topic-education-and-learning { --color-topic-icon: var(--color-topic-education); }
-.card--topic-work-and-employment { --color-topic-icon: var(--color-topic-work); }
-.card--topic-physical-health-and-healthcare { --color-topic-icon: var(--color-topic-health); }
-.card--topic-mental-health-and-wellbeing { --color-topic-icon: var(--color-topic-wellbeing); }
-.card--topic-family-relationships-and-social-life { --color-topic-icon: var(--color-topic-relationships); }
-.card--topic-daily-life-and-housing { --color-topic-icon: var(--color-topic-daily-life); }
-.card--topic-inclusion-rights-and-safety { --color-topic-icon: var(--color-topic-inclusion); }
-.card--topic-cross-cutting { --color-topic-icon: var(--color-topic-cross-cutting); }
+/* Reusable accent variants; topic assignments live in knowledge_library/topics.py. */
+.card--topic-accent-01 { --color-topic-icon: var(--color-topic-accent-01); }
+.card--topic-accent-02 { --color-topic-icon: var(--color-topic-accent-02); }
+.card--topic-accent-03 { --color-topic-icon: var(--color-topic-accent-03); }
+.card--topic-accent-04 { --color-topic-icon: var(--color-topic-accent-04); }
+.card--topic-accent-05 { --color-topic-icon: var(--color-topic-accent-05); }
+.card--topic-accent-06 { --color-topic-icon: var(--color-topic-accent-06); }
+.card--topic-accent-07 { --color-topic-icon: var(--color-topic-accent-07); }
+.card--topic-accent-08 { --color-topic-icon: var(--color-topic-accent-08); }
+.card--topic-accent-09 { --color-topic-icon: var(--color-topic-accent-09); }
+.card--topic-accent-10 { --color-topic-icon: var(--color-topic-accent-10); }
+.card--topic-accent-11 { --color-topic-icon: var(--color-topic-accent-11); }
+.card--topic-accent-12 { --color-topic-icon: var(--color-topic-accent-12); }
 .card__topic-icon {
   width: 100%;
   height: auto;
@@ -687,6 +700,19 @@ button { font: inherit; cursor: pointer; }
   border-inline-start: 6px solid var(--color-accent-card);
 }
 .card--resource .card__summary { overflow-wrap: anywhere; }
+.card--recent {
+  background: var(--color-recent-card-bg);
+  color: var(--color-text);
+  text-decoration: none;
+}
+.card--recent .card__body { border-inline-start-color: var(--color-topic-icon); }
+.card--recent .card__title { color: var(--color-recent-card-heading); }
+.card--recent .tag { border-color: currentColor; }
+.card--recent:is(:hover, :focus-visible, :active) { color: var(--color-text); }
+.card--recent:is(:hover, :focus-visible, :active) .card__title {
+  color: var(--color-recent-card-heading-hover);
+  text-decoration: underline;
+}
 .card__topics { order: -1; }
 .card--resource .tag { max-width: 100%; overflow-wrap: anywhere; }
 .card__details {
@@ -1324,6 +1350,7 @@ button { font: inherit; cursor: pointer; }
   max-inline-size: var(--resource-content-max-width);
   overflow-wrap: anywhere;
 }
+.resource-layout h2 { color: var(--color-brand-primary); }
 .resource-content__text :is(ul, ol),
 .resource-content__transcript :is(ul, ol) { padding-inline-start: var(--space-lg); }
 .resource-content__text li + li,
@@ -1483,11 +1510,20 @@ button { font: inherit; cursor: pointer; }
 .footer__legal {
   border-top: 1px solid var(--color-border);
   padding-block: var(--space-lg);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xl);
+}
+@media (min-width: 48em) {
+  .footer__legal { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+.footer__legal-column {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md) var(--space-xl);
+  flex-direction: column;
+  align-items: flex-start;
+  min-inline-size: 0;
+  gap: var(--space-md);
+  overflow-wrap: anywhere;
 }
 .footer__legal-links {
   list-style: none;
@@ -1505,8 +1541,15 @@ button { font: inherit; cursor: pointer; }
 .footer__colophon {
   display: flex;
   flex-direction: column;
-  flex-basis: 100%;
   font-size: var(--text-sm-size);
   line-height: var(--text-sm-lh);
 }
-.footer__acami { width: 16rem; }
+.footer__colophon p { margin: 0; }
+.footer__acami {
+  width: 16rem;
+  max-inline-size: 100%;
+  height: auto;
+  background: var(--color-logo-plate);
+  padding: var(--logo-plate-pad);
+  border-radius: var(--radius);
+}

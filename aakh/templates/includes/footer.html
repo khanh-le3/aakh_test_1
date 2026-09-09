@@ -86,21 +86,25 @@
         </div>
 
         <div class="footer__legal">
-            {# TODO: create these pages (GenericPage) and link them via the page tree. #}
-            <ul class="footer__legal-links">
-                <li><a class="nav-link" href="/copyright/">Copyright</a></li>
-                <li><a class="nav-link" href="/disclaimer/">Disclaimer</a></li>
-                <li><a class="nav-link" href="/privacy/">Privacy</a></li>
-                <li><a class="nav-link" href="/accessibility-statement/">Accessibility statement</a></li>
-                <li><a class="nav-link" href="/sitemap/">Sitemap</a></li>
-            </ul>
-            <p class="footer__copyright">&copy; 2026 La Trobe University</p>
-            <div class="footer__colophon">
-                <p>
-                    Website by the <a href="https://www.latrobe.edu.au/research/acami">Australian Centre for Artificial Intelligence
-                    in Medical Innovation (ACAMI)</a>
-                </p>
-                <!-- <img class="footer__acami" src="{% static 'img/logo-acami.svg' %}" alt=""> -->
+            <div class="footer__legal-column">
+                {# TODO: create these pages (GenericPage) and link them via the page tree. #}
+                <ul class="footer__legal-links">
+                    <li><a class="nav-link" href="/copyright/">Copyright</a></li>
+                    <li><a class="nav-link" href="/disclaimer/">Disclaimer</a></li>
+                    <li><a class="nav-link" href="/privacy/">Privacy</a></li>
+                    <li><a class="nav-link" href="/accessibility-statement/">Accessibility statement</a></li>
+                    <li><a class="nav-link" href="/sitemap/">Sitemap</a></li>
+                </ul>
+                <p class="footer__copyright">&copy; 2026 La Trobe University</p>
+            </div>
+            <div class="footer__legal-column">
+                <img class="footer__acami" src="{% static 'img/logo-acami.svg' %}" alt="">
+                <div class="footer__colophon">
+                    <p>
+                        Website by the <a href="https://www.latrobe.edu.au/research/acami">Australian Centre for Artificial Intelligence
+                        in Medical Innovation (ACAMI)</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

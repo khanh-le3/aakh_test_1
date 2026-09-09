@@ -38,6 +38,25 @@ TOPIC_CHOICES = tuple((key, name) for key, name, _icon, _summary in TOPICS)
 TOPIC_KEYS = frozenset(key for key, _name in TOPIC_CHOICES)
 TOPIC_COUNT = len(TOPICS)
 
+# Single source of truth for topic-to-accent assignments. These stable slot IDs
+# select --color-topic-accent-<id> in tokens.css through aakh.css card variants.
+# Assign by fixed key, never by the editable name, icon or display order.
+# Change a value here to reassign an accent; change tokens.css to edit its colour.
+TOPIC_ACCENTS = {
+    "understanding-autism": "01",
+    "diagnosis-and-assessment": "02",
+    "communication-sensory-and-movement": "03",
+    "therapies-supports-and-services": "04",
+    "education-and-learning": "05",
+    "work-and-employment": "06",
+    "physical-health-and-healthcare": "07",
+    "mental-health-and-wellbeing": "08",
+    "family-relationships-and-social-life": "09",
+    "daily-life-and-housing": "10",
+    "inclusion-rights-and-safety": "11",
+    "cross-cutting": "12",
+}
+
 ICON_CHOICES = (
     ("understanding", "Understanding autism"),
     ("diagnosis", "Diagnosis and assessment"),

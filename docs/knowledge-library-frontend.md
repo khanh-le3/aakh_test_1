@@ -34,22 +34,22 @@ the topic partial is in its `includes/` directory. Styles remain in `tokens.css`
 and `aakh.css`. No extra JavaScript, dependency or stylesheet is needed.
 
 All topic cards use ivory-75 (`#ebe5d8`), heading text and body text. Twelve muted
-icon accents complement the site palette without repeating its navy, teal or gold:
+icon accents complement the site palette without repeating its navy, teal or gold.
 
-| Topic | Accent | Hex |
-| --- | --- | --- |
-| Understanding autism | Plum | `#79537d` |
-| Diagnosis and assessment | Terracotta | `#a14f39` |
-| Communication, sensory and movement | Rose | `#a4476b` |
-| Therapies, supports and services | Sienna | `#a45124` |
-| Education and learning | Olive | `#676b36` |
-| Work and employment | Periwinkle | `#6863a8` |
-| Physical health and healthcare | Brick | `#a14d4a` |
-| Mental health and wellbeing | Mauve | `#8a5c73` |
-| Family, relationships and social life | Violet | `#7857a0` |
-| Daily life and housing | Cocoa | `#805e49` |
-| Inclusion, rights and safety | Slate | `#5c6f7e` |
-| Cross-cutting | Mulberry | `#944d83` |
+`TOPIC_ACCENTS` in `knowledge_library/topics.py` is the single source of truth for
+topic-to-accent assignments. It maps fixed topic keys to stable slot IDs (`01`–`12`),
+independent of topic names, icons and display order. `TopicCard.accent` and
+`TopicPage.accent` read this mapping at render time, including for existing cards
+and saved revisions.
+
+- To give a topic a different existing accent, change its slot in `TOPIC_ACCENTS`.
+- To change an accent's colour, edit its semantic token in `tokens.css`
+  (`--color-topic-accent-01` through `--color-topic-accent-12`). Raw palette values
+  stay in that file's primitive layer; preference overrides use the semantic tokens.
+- `aakh.css` connects each neutral `card--topic-accent-<id>` variant to its token.
+  The template uses `card.accent`; neither file contains topic-specific assignments.
+
+Reassigning an accent requires no database migration or content republishing.
 
 The enlarged icon sits to the left of the topic name. Continued lines stay in
 the name's column to the right. Icons are 3rem (48px at the default text size),
@@ -100,9 +100,19 @@ migration. Editors can continue choosing a different icon for a card.
 Topic and resource destinations are Wagtail pages. The topics index redirects
 to the library and is never linked. Library search opens the resource index,
 where it searches resource names and summaries. Recently added lists public,
-published resources, ordered by their first publication, with real card metadata
-and pagination. Editors can select 20, 50 or 100 items per page using the Apply
-button. An empty library shows a plain-language message instead of sample resources.
+published resources, showing the latest 10 ordered by their first publication,
+with real card metadata and no pagination or page-size control. The existing
+“View all resources” link opens the full listing. An empty library shows a
+plain-language message instead of sample resources.
+
+Recently added cards span the full content container and use ivory-65. Each card
+is one native link labelled by its resource heading, with selectable text and a
+visible focus outline. Hover, press and keyboard focus underline the resource
+name and use `--color-interactive-hover`. The accent bar matches the primary
+topic icon. Topic chips show the primary topic first, followed by any secondary
+topics; each label uses its topic's icon colour on a muted tint with at least
+4.5:1 text contrast. A 1px border in the same topic colour keeps each chip distinct
+from the card background. Secondary topics are prefetched with the resources.
 See [Resource page](resource-page.md) for the editor fields and content blocks.
 
 The original layout came from Figma frame `156:10267`. The repeated topic fixtures

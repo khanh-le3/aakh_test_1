@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page
 
-from ..topics import TOPIC_CHOICES
+from ..topics import TOPIC_ACCENTS, TOPIC_CHOICES
 from .shared import FixedLibraryPathMixin, library_context, resource_listing_context
 
 
@@ -41,6 +41,10 @@ class TopicPage(FixedLibraryPathMixin, Page):
     @property
     def fixed_slug(self):
         return self.topic_key
+
+    @property
+    def accent(self):
+        return TOPIC_ACCENTS[self.topic_key]
 
     def clean(self):
         super().clean()

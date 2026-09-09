@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static aakh_tags wagtailcore_tags %}
+{% load static aakh_tags %}
 
 {% block title %}Knowledge library{% endblock %}
 
@@ -53,42 +53,15 @@
 <section class="section section--compact" id="recently-added" aria-labelledby="recent-heading">
     <div class="container">
         <h2 id="recent-heading">Recently added</h2>
-        <div class="section__reading-width">
-            {% if recent_resources %}
-            <ul class="card-grid card-grid--list section__body" role="list">
-                {% for resource in recent_resources %}
-                {% include "knowledge_library/includes/published_resource_card.html" %}
-                {% endfor %}
-            </ul>
-
-            <div class="pagination">
-                <form class="pagination__size" action="{% pageurl page %}#recently-added" method="get">
-                    <label for="library-page-size">Items per page</label>
-                    <select class="input pagination__select" id="library-page-size" name="per_page">
-                        {% for size in recent_page_sizes %}<option value="{{ size }}"{% if recent_per_page == size %} selected{% endif %}>{{ size }}</option>{% endfor %}
-                    </select>
-                    <button class="btn btn--secondary btn--field" type="submit">Apply</button>
-                </form>
-                {% if recent_resources.has_other_pages %}
-                <nav aria-label="Recently added pages">
-                    <ul class="pagination__list" role="list">
-                        {% if recent_resources.has_previous %}<li><a class="nav-link" href="?per_page={{ recent_per_page }}&amp;page={{ recent_resources.previous_page_number }}#recently-added" rel="prev">{% icon "arrow-left-24" %} Previous</a></li>{% endif %}
-                        {% for number in recent_page_range %}
-                        {% if number == recent_resources.paginator.ELLIPSIS %}
-                        <li><span aria-hidden="true">{{ number }}</span></li>
-                        {% else %}
-                        <li><a class="nav-link" href="?per_page={{ recent_per_page }}&amp;page={{ number }}#recently-added" aria-label="Page {{ number }}"{% if number == recent_resources.number %} aria-current="page"{% endif %}>{{ number }}</a></li>
-                        {% endif %}
-                        {% endfor %}
-                        {% if recent_resources.has_next %}<li><a class="nav-link" href="?per_page={{ recent_per_page }}&amp;page={{ recent_resources.next_page_number }}#recently-added" rel="next">Next {% icon "arrow-right" %}</a></li>{% endif %}
-                    </ul>
-                </nav>
-                {% endif %}
-            </div>
-            {% else %}
-            <p class="section__body">No resources have been published yet. Browse the topics above to explore the library.</p>
-            {% endif %}
-        </div>
+        {% if recent_resources %}
+        <ul class="card-grid card-grid--list section__body" role="list">
+            {% for resource in recent_resources %}
+            {% include "knowledge_library/includes/recent_resource_card.html" %}
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="section__body">No resources have been published yet. Browse the topics above to explore the library.</p>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

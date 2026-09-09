@@ -1,39 +1,37 @@
 {% extends "base.html" %}
-{% load static aakh_tags %}
+{% load static aakh_tags wagtailcore_tags %}
 
 {% block title %}Knowledge library{% endblock %}
 
 {% block content %}
-{% comment %}
-Frontend sample content from Figma frame 156:10267. No CMS context is required.
-Topic/resource links and form actions reserve the agreed future library URLs.
-The repeated final topic row and resource metadata are mockup fixtures, not a taxonomy.
-{% endcomment %}
-
 <section class="hero hero--library" aria-labelledby="library-heading">
-    <img class="hero__texture" src="{% static 'img/library-banner.png' %}" alt="" width="1440" height="468">
     <div class="container hero__library-content">
-        <nav class="breadcrumbs" aria-label="Breadcrumb">
-            <ol class="breadcrumbs__list" role="list">
-                <li><a class="breadcrumbs__link" href="/">Home</a></li>
-                <li><a class="breadcrumbs__link" href="/knowledge-library/" aria-current="page">Knowledge library</a></li>
-            </ol>
-        </nav>
-        <h1 class="hero__title" id="library-heading">Knowledge library</h1>
-        <p>Every week we summarise one piece of autism research into a snapshot to help the community understand what it found, how much confidence to place in it, and what it might mean in everyday life.<br>
-            Practical guidelines, frameworks, and reports are also in the library. Start with a topic, or search using everyday words.</p>
+        <div class="hero__library-copy">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <ol class="breadcrumbs__list" role="list">
+                    <li><a class="breadcrumbs__link" href="/">Home</a></li>
+                    <li><a class="breadcrumbs__link" href="/knowledge-library/" aria-current="page">Knowledge library</a></li>
+                </ol>
+            </nav>
+            <h1 class="hero__title" id="library-heading">Knowledge library</h1>
+            <p>{{ page.banner_intro|linebreaksbr }}</p>
 
-        <form class="search-form search-form--library" role="search" aria-label="Search the library"
-              action="/knowledge-library/resources/" method="get">
-            <label class="search-form__label" for="library-search">Search the library</label>
-            <div class="search-form__field">
-                {% icon "search" %}
-                <input class="input search-form__input" id="library-search" name="query" type="search"
-                       placeholder="e.g. sleep, school, diagnosis as an adult" aria-describedby="library-search-tip">
-            </div>
-            <button class="btn btn--primary btn--field search-form__submit" type="submit">Search</button>
-            <p class="search-form__hint" id="library-search-tip">Tip: try everyday words like “meltdowns”, “sleep” or “NDIS”. Or choose a topic below.</p>
-        </form>
+            <form class="search-form search-form--library" role="search" aria-label="Search the library"
+                  action="/knowledge-library/resources/" method="get">
+                <label class="search-form__label" for="library-search">Search the library</label>
+                <div class="search-form__field">
+                    {% icon "search" %}
+                    <input class="input search-form__input" id="library-search" name="query" type="search"
+                           placeholder="e.g. sleep, school, diagnosis as an adult" aria-describedby="library-search-tip">
+                </div>
+                <button class="btn btn--primary btn--field search-form__submit" type="submit">Search</button>
+                <p class="search-form__hint" id="library-search-tip">Search using everyday words, or choose a topic below.</p>
+            </form>
+        </div>
+        <div class="hero__library-media">
+            <img class="hero__library-illustration" src="{% static 'img/illustration-knowledge-lib.png' %}"
+                 alt="" width="1377" height="785">
+        </div>
     </div>
 </section>
 
@@ -43,21 +41,11 @@ The repeated final topic row and resource metadata are mockup fixtures, not a ta
             <h2 id="topics-heading">Browse by topic</h2>
             <a class="nav-link" href="/knowledge-library/resources/">View all resources {% icon "arrow-right" %}</a>
         </div>
-        <div class="section__accent" aria-hidden="true"></div>
-        <p class="section__description">Choose the topic closest to your question. Each topic page lists the snapshots, frameworks, guidelines and reports on that topic.</p>
+        <p class="section__description">{{ page.topics_intro|linebreaksbr }}</p>
         <ul class="card-grid card-grid--topics section__body" role="list">
-            {% include "knowledge_library/includes/topic_card.html" with title="Diagnosis and identity" slug="diagnosis-and-identity" image="diagnosis" summary="Getting a diagnosis, self-identification, telling others" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Mental health and wellbeing" slug="mental-health-and-wellbeing" image="wellbeing" summary="Mental health, emotional wellbeing and finding support" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Sleep, sensory and daily life" slug="sleep-sensory-and-daily-life" image="daily-life" summary="Sleep, sensory needs, routines and everyday activities" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Early years and school" slug="early-years-and-school" image="school" summary="Early support, kindergarten, primary and secondary school" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Adulthood, work and independence" slug="adulthood-work-and-independence" image="adulthood" summary="Further study, employment, housing and daily living" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Health and health care" slug="health-and-health-care" image="health" summary="Seeing doctors, hospital, medicines and physical health" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Family, carers and relationships" slug="family-carers-and-relationships" image="relationships" summary="Parenting, siblings, friendships and partners" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Supports, services and funding" slug="supports-services-and-funding" image="supports" summary="NDIS, therapies, community services and advocacy" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Adulthood, work and independence" slug="adulthood-work-and-independence" image="adulthood" summary="Further study, employment, housing and daily living" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Health and health care" slug="health-and-health-care" image="health" summary="Seeing doctors, hospital, medicines and physical health" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Family, carers and relationships" slug="family-carers-and-relationships" image="relationships" summary="Parenting, siblings, friendships and partners" only %}
-            {% include "knowledge_library/includes/topic_card.html" with title="Supports, services and funding" slug="supports-services-and-funding" image="supports" summary="NDIS, therapies, community services and advocacy" only %}
+            {% for card in page.topic_cards.all %}
+                {% include "knowledge_library/includes/topic_card.html" with card=card only %}
+            {% endfor %}
         </ul>
     </div>
 </section>
@@ -65,39 +53,41 @@ The repeated final topic row and resource metadata are mockup fixtures, not a ta
 <section class="section section--compact" id="recently-added" aria-labelledby="recent-heading">
     <div class="container">
         <h2 id="recent-heading">Recently added</h2>
-        <div class="section__accent" aria-hidden="true"></div>
         <div class="section__reading-width">
+            {% if recent_resources %}
             <ul class="card-grid card-grid--list section__body" role="list">
-                {% include "knowledge_library/includes/resource_card.html" with title="What helps autistic children sleep better?" slug="what-helps-autistic-children-sleep-better" topic="Diagnosis and identity" type="Snapshot" summary="A snapshot of research about sleep in autistic children, with questions to consider when reading the findings and thinking about everyday life." only %}
-                {% include "knowledge_library/includes/resource_card.html" with title="Weighted blankets and sleep: what the evidence shows" slug="weighted-blankets-and-sleep" topic="Sleep, sensory and daily life" type="Snapshot" summary="A look at research on weighted blankets and sleep. This snapshot explores what the study asked, what it found and the limits of the evidence." only %}
-                {% include "knowledge_library/includes/resource_card.html" with title="Bedtime routines" slug="bedtime-routines" topic="Family, carers and relationships" type="Snapshot" summary="Research about bedtime routines and family life, summarised in everyday language. Explore the study’s findings and questions for future research." only %}
-                {% include "knowledge_library/includes/resource_card.html" with title="Weighted blankets and sleep: what the evidence shows — A framework" slug="weighted-blankets-and-sleep-framework" type="Framework" summary="A framework for considering research about weighted blankets and sleep, including how to discuss evidence, individual preferences and support needs." only %}
-                {% include "knowledge_library/includes/resource_card.html" with title="Bedtime routines" slug="bedtime-routines-early-years" topic="Early years and school" type="Snapshot" summary="A snapshot exploring bedtime routines in the early years. Read about the research question, the study’s findings and what remains uncertain." only %}
+                {% for resource in recent_resources %}
+                {% include "knowledge_library/includes/published_resource_card.html" %}
+                {% endfor %}
             </ul>
 
-            {# Static pagination specimen; wire result counts and current state with the future library. #}
             <div class="pagination">
-                <form class="pagination__size" action="/knowledge-library/#recently-added" method="get">
+                <form class="pagination__size" action="{% pageurl page %}#recently-added" method="get">
                     <label for="library-page-size">Items per page</label>
                     <select class="input pagination__select" id="library-page-size" name="per_page">
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
+                        {% for size in recent_page_sizes %}<option value="{{ size }}"{% if recent_per_page == size %} selected{% endif %}>{{ size }}</option>{% endfor %}
                     </select>
                     <button class="btn btn--secondary btn--field" type="submit">Apply</button>
                 </form>
+                {% if recent_resources.has_other_pages %}
                 <nav aria-label="Recently added pages">
                     <ul class="pagination__list" role="list">
-                        <li><span class="pagination__disabled" aria-disabled="true">{% icon "arrow-left-24" %} Prev</span></li>
-                        <li><a class="nav-link" href="/knowledge-library/?page=1#recently-added" aria-label="Page 1" aria-current="page">1</a></li>
-                        <li><a class="nav-link" href="/knowledge-library/?page=2#recently-added" aria-label="Page 2">2</a></li>
-                        <li><a class="nav-link" href="/knowledge-library/?page=3#recently-added" aria-label="Page 3">3</a></li>
-                        <li><span aria-hidden="true">…</span></li>
-                        <li><a class="nav-link" href="/knowledge-library/?page=12#recently-added" aria-label="Page 12">12</a></li>
-                        <li><a class="nav-link" href="/knowledge-library/?page=2#recently-added" rel="next">Next {% icon "arrow-right" %}</a></li>
+                        {% if recent_resources.has_previous %}<li><a class="nav-link" href="?per_page={{ recent_per_page }}&amp;page={{ recent_resources.previous_page_number }}#recently-added" rel="prev">{% icon "arrow-left-24" %} Previous</a></li>{% endif %}
+                        {% for number in recent_page_range %}
+                        {% if number == recent_resources.paginator.ELLIPSIS %}
+                        <li><span aria-hidden="true">{{ number }}</span></li>
+                        {% else %}
+                        <li><a class="nav-link" href="?per_page={{ recent_per_page }}&amp;page={{ number }}#recently-added" aria-label="Page {{ number }}"{% if number == recent_resources.number %} aria-current="page"{% endif %}>{{ number }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if recent_resources.has_next %}<li><a class="nav-link" href="?per_page={{ recent_per_page }}&amp;page={{ recent_resources.next_page_number }}#recently-added" rel="next">Next {% icon "arrow-right" %}</a></li>{% endif %}
                     </ul>
                 </nav>
+                {% endif %}
             </div>
+            {% else %}
+            <p class="section__body">No resources have been published yet. Browse the topics above to explore the library.</p>
+            {% endif %}
         </div>
     </div>
 </section>

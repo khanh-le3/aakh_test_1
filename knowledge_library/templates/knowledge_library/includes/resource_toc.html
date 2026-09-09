@@ -1,0 +1,8 @@
+<ul class="resource-toc__list" role="list">
+    {% for item in items %}
+    <li class="resource-toc__item">
+        <a class="resource-toc__link" href="#{{ item.id }}" target="_self">{{ item.title }}</a>
+        {% if item.children %}{% include "knowledge_library/includes/resource_toc.html" with items=item.children only %}{% endif %}
+    </li>
+    {% endfor %}
+</ul>

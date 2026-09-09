@@ -110,6 +110,20 @@ One topic (working name "cross-cutting") may be reserved for high-level assets
 that do not belong to any subject topic — typically frameworks, guidelines, and
 reports. Not yet confirmed.
 
+TOPICS: 
+- Understanding autism
+- Diagnosis and assessment
+- Communication, sensory and movement
+- Therapies, supports and services
+- Education and learning
+- Work and employment
+- Physical health and healthcare
+- Mental health and wellbeing
+- Family, relationships and social life
+- Daily life and housing
+- Inclusion, rights and safety
+- Cross-cutting
+
 ### Resource model — `DECIDED`
 
 | Metadata | Who can edit | Notes |
@@ -159,8 +173,13 @@ Common JavaScript accessibility risks to avoid:
 - Missing focus management: Dynamic content updates often fail to announce changes to screen readers if ARIA live regions are missing. 
 
 ### TechStack 
-Wagtail CMS is used
-Hosting has not yet been decided, but Google Cloud Run is being considered. We will use Postgres 16 as the database.
+Wagtail CMS
+Hosting: Google Cloud Run
+Database: Postgres 16
+Images, documents: object storage/CDN
+Audio: Cloudflare R2
+Video: Cloudflare Stream
+Analytics: Self-hosted Umami
 
 ### Validation
 

@@ -1,0 +1,17 @@
+<div class="resource-content__table-scroll" role="region" aria-label="{{ value.caption }}" tabindex="0">
+  <table class="resource-content__table">
+    <caption>{{ value.caption }}</caption>
+    <thead>
+      <tr>{% for header in value.headers %}<th scope="col">{{ header }}</th>{% endfor %}</tr>
+    </thead>
+    <tbody>
+      {% for row in value.rows %}
+        <tr>
+          {% for cell in row %}
+            {% if forloop.first and value.first_column_is_header %}<th scope="row">{{ cell|linebreaksbr }}</th>{% else %}<td>{{ cell|linebreaksbr }}</td>{% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

@@ -47,10 +47,11 @@
         {% endblock %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+    <body class="site-page {% block body_class %}{% endblock %}">
+        {# Keep the editor toolbar clear of the public back-to-top control. #}
+        {% wagtailuserbar "bottom-left" %}
 
-        <a class="skip-link" href="#main-content">Skip to main content</a>
+        <a class="skip-link" id="page-top" href="#main-content">Skip to main content</a>
 
         {% include "includes/header.html" %}
 
@@ -59,6 +60,7 @@
         </main>
 
         {% include "includes/footer.html" %}
+        {% include "includes/back_to_top.html" %}
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/aakh.js' %}"></script>

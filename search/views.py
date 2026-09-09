@@ -3,6 +3,8 @@ from django.template.response import TemplateResponse
 
 from wagtail.models import Page
 
+from knowledge_library.models import TopicIndexPage
+
 # To enable logging of search queries for use with the "Promoted search results" module
 # <https://docs.wagtail.org/en/stable/reference/contrib/searchpromotions.html>
 # uncomment the following line and the lines indicated in the search function
@@ -17,7 +19,9 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = Page.objects.live().search(search_query)
+        search_results = (
+            Page.objects.live().public().not_type(TopicIndexPage).search(search_query)
+        )
 
         # To log this query for use with the "Promoted search results" module:
 

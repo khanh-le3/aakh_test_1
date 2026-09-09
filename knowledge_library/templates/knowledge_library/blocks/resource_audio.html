@@ -1,0 +1,13 @@
+{% load wagtailcore_tags %}
+<div class="resource-content__media">
+  <p class="resource-content__media-title" id="{{ resource_block_id }}-title"><strong>{{ value.title }}</strong></p>
+  <audio class="resource-content__player" controls preload="none" aria-labelledby="{{ resource_block_id }}-title">
+    <source src="{{ value.url }}">
+    Your browser does not support this audio player.
+  </audio>
+  <p><a href="{{ value.url }}">Open audio: {{ value.title }}</a></p>
+  <div class="resource-content__transcript">
+    <p><strong>Transcript: {{ value.title }}</strong></p>
+    {{ value.transcript|richtext }}
+  </div>
+</div>

@@ -76,13 +76,7 @@ class HomePage(Page):
         blank=True,
         help_text="One or two short paragraphs welcoming visitors.",
     )
-    hero_image = models.ForeignKey(
-        "wagtailimages.Image",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
-    )
+
     hero_cta_primary_label = models.CharField(
         "primary button label", max_length=40, blank=True, default="Explore the library"
     )
@@ -123,7 +117,6 @@ class HomePage(Page):
                 FieldPanel("hero_heading"),
                 FieldPanel("hero_heading_line_2"),
                 FieldPanel("hero_intro"),
-                FieldPanel("hero_image"),
                 FieldPanel("hero_cta_primary_label"),
                 FieldPanel("hero_cta_primary_page"),
                 FieldPanel("hero_cta_secondary_label"),

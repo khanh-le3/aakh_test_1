@@ -1,0 +1,77 @@
+/* Print layout uses the shared semantic palette; reader theme preferences do
+   not affect the white paper background. Text stays selectable and tagged. */
+@page {
+  size: A4;
+  margin: 20mm 20mm 22mm;
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font: 10pt "Lexend", sans-serif;
+    color: var(--color-text);
+  }
+}
+.resource-pdf {
+  margin: 0;
+  font-family: "Lexend", sans-serif;
+  font-size: 12pt;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg-raised);
+  overflow-wrap: anywhere;
+  hyphens: none;
+}
+.resource-pdf__brand { font-size: 10pt; font-weight: 600; color: var(--color-brand-primary); }
+.resource-pdf h1,
+.resource-pdf h2,
+.resource-pdf h3,
+.resource-pdf h4 {
+  color: var(--color-brand-primary);
+  line-height: 1.3;
+  break-after: avoid;
+  margin: 1.5em 0 0.65em;
+}
+.resource-pdf h1 { font-size: 24pt; margin-top: 0.6em; }
+.resource-pdf h2 { font-size: 19pt; }
+.resource-pdf h3 { font-size: 16pt; }
+.resource-pdf h4 { font-size: 14pt; }
+.resource-pdf p { margin: 0 0 0.8em; orphans: 3; widows: 3; }
+.resource-pdf a { color: var(--color-interactive); text-decoration: underline; }
+.resource-pdf__summary { font-size: 13pt; }
+.resource-pdf__metadata,
+.resource-pdf__citation,
+.resource-pdf__source { font-size: 11pt; }
+.resource-pdf__citation { border-inline-start: 2pt solid var(--color-border); padding-inline-start: 1em; margin-block: 1em; }
+.resource-pdf__citation p { margin-bottom: 0.4em; }
+.resource-pdf__contents { margin-block: 1.5em; }
+.resource-pdf__contents h2 { bookmark-level: none; }
+.resource-pdf__contents a { text-decoration: none; }
+.resource-pdf__contents a::after { content: " (page " target-counter(attr(href), page) ")"; }
+.resource-pdf ul,
+.resource-pdf ol { padding-inline-start: 1.6em; margin-block: 0.6em 1em; }
+.resource-pdf li { margin-bottom: 0.4em; orphans: 3; widows: 3; }
+.resource-pdf figure { margin: 1.2em 0; }
+.resource-pdf img {
+  display: block;
+  max-width: 100%;
+  max-height: 190mm;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.resource-pdf figcaption { margin-top: 0.5em; font-size: 11pt; }
+.resource-pdf blockquote { margin: 0; padding-inline-start: 1em; border-inline-start: 2pt solid var(--color-border); }
+.resource-pdf table { width: 100%; table-layout: fixed; border-collapse: collapse; margin-block: 1em; }
+.resource-pdf caption { text-align: start; font-weight: 600; margin-bottom: 0.6em; }
+.resource-pdf thead { display: table-header-group; }
+.resource-pdf th,
+.resource-pdf td { padding: 0.6em; border: 1pt solid var(--color-border); vertical-align: top; text-align: start; }
+.resource-pdf th { font-weight: 600; background: var(--color-bg); }
+.resource-pdf dl { margin: 0 0 1.2em; }
+.resource-pdf dt { font-weight: 600; break-after: avoid; }
+.resource-pdf dd { margin: 0 0 0.7em; }
+.resource-pdf__row-label { font-weight: 600; break-after: avoid; }
+.resource-pdf .resource-content__media-title { break-after: avoid; }
+.resource-pdf .resource-attachments { padding: 0; list-style: none; }
+.resource-pdf .resource-attachments__item { margin-bottom: 1.2em; }
+.resource-pdf .resource-attachments__title { font-weight: 600; }
+.resource-pdf .resource-attachments__meta { display: block; font-size: 11pt; }
+.resource-pdf .resource-attachments__description { margin-top: 0.4em; }

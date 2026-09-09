@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<header class="hero hero--resource">
+    <div class="container hero__resource-content">
+        {% include "knowledge_library/includes/resource_breadcrumbs.html" %}
+        <h1 class="hero__resource-title">{{ page.title }}</h1>
+        {% if page.introduction %}<div class="hero__resource-summary">{{ page.introduction|linebreaks }}</div>{% endif %}
+    </div>
+</header>
+<section class="section section--compact" aria-labelledby="resource-list-title">
+    <div class="container">
+        <h2 id="resource-list-title">{% if query %}Results for “{{ query }}”{% else %}Resources{% endif %}</h2>
+        <div class="section__body">
+            {% if resources %}
+            <p>{{ resources.paginator.count }} resource{{ resources.paginator.count|pluralize }}</p>
+            <ul class="card-grid card-grid--list" role="list">
+                {% for resource in resources %}
+                {% include "knowledge_library/includes/published_resource_card.html" %}
+                {% endfor %}
+            </ul>
+            {% if resources.has_other_pages %}
+            <nav class="pagination" aria-label="Resource pages">
+                <ul class="pagination__list" role="list">
+                    {% if resources.has_previous %}<li><a class="nav-link" href="?{% if query %}query={{ query|urlencode }}&amp;{% endif %}page={{ resources.previous_page_number }}#resource-list-title" rel="prev">Previous</a></li>{% endif %}
+                    <li>Page {{ resources.number }} of {{ resources.paginator.num_pages }}</li>
+                    {% if resources.has_next %}<li><a class="nav-link" href="?{% if query %}query={{ query|urlencode }}&amp;{% endif %}page={{ resources.next_page_number }}#resource-list-title" rel="next">Next</a></li>{% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+            {% else %}
+            <p>{% if query %}No resources match your search. Try a different word, or browse by topic.{% else %}No resources have been published here yet.{% endif %}</p>
+            <a href="{% pageurl library_page %}">Browse the knowledge library</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

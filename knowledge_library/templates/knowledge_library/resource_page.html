@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags aakh_tags %}
+
+{% block content %}
+<header class="hero hero--resource">
+    <div class="container hero__resource-content">
+        {% include "knowledge_library/includes/resource_breadcrumbs.html" %}
+        <h1 class="hero__resource-title" id="resource-title">{{ page.title }}</h1>
+        <div class="hero__resource-summary">{{ page.full_summary|linebreaks }}</div>
+        {% if page.citation %}
+        <div class="hero__resource-citation">
+            <p class="hero__resource-label">Citation</p>
+            {{ page.citation|richtext }}
+        </div>
+        {% endif %}
+        <dl class="resource-meta">
+            <div class="resource-meta__item"><dt>Type:</dt><dd>{{ page.get_resource_type_display }}</dd></div>
+            {% if page.reading_time != None %}
+            <div class="resource-meta__item"><dt class="visually-hidden">Read time:</dt><dd>{{ page.reading_time }} minute read</dd></div>
+            {% endif %}
+            <div class="resource-meta__item"><dt>Published:</dt><dd><time datetime="{{ page.publication_date|date:'Y-m' }}">{{ page.publication_date|date:"F Y" }}</time></dd></div>
+            {% if page.review_date %}
+            <div class="resource-meta__item"><dt>Reviewed:</dt><dd><time datetime="{{ page.review_date|date:'Y-m' }}">{{ page.review_date|date:"F Y" }}</time></dd></div>
+            {% endif %}
+        </dl>
+        <ul class="resource-topics" role="list" aria-label="Topics">
+            {% for topic in topics %}
+            <li class="resource-topics__item">{% if topic.resource_linkable %}<a class="resource-topics__link" href="{% pageurl topic %}">{{ topic.title }}</a>{% else %}<span class="resource-topics__label">{{ topic.title }}</span>{% endif %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</header>
+
+<div class="container resource-layout{% if not resource_toc and not resource_pdf_url %} resource-layout--without-sidebar{% endif %}">
+    {% if resource_toc or resource_pdf_url %}
+    <div class="resource-sidebar">
+        {% if resource_toc %}
+        <nav class="resource-toc" aria-labelledby="resource-toc-title">
+            <h2 class="resource-toc__title" id="resource-toc-title">On this page</h2>
+            {% include "knowledge_library/includes/resource_toc.html" with items=resource_toc only %}
+        </nav>
+        {% endif %}
+        {% if resource_pdf_url %}
+        <a class="btn btn--secondary resource-sidebar__download" href="{{ resource_pdf_url }}" target="_self" download>
+            <span>Download PDF</span>
+            {% icon "file-down" %}
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+    <article class="resource-content" aria-labelledby="resource-title">
+        {{ resource_body }}
+    </article>
+</div>
+{% endblock %}

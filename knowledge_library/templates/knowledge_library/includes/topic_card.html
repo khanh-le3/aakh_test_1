@@ -1,9 +1,10 @@
-{% load static aakh_tags %}
-<li class="card card--topic">
-    <div class="card__body">
-        <img class="card__topic-icon" src="{% static 'img/topics/' %}{{ image }}.svg" alt="" width="48" height="48" loading="lazy">
-        <h3 class="card__title"><a href="/knowledge-library/topics/{{ slug }}/">{{ title }}</a></h3>
-        <p class="card__summary">{{ summary }}</p>
-        <div class="card__footer">{% icon "arrow-right" %}</div>
-    </div>
+{% load aakh_tags %}
+<li class="card card--topic card--topic-accent-{{ card.accent }}">
+    <a class="card__body card__topic-link" href="{{ card.url }}" aria-labelledby="topic-{{ card.topic_key }}">
+        <h3 class="card__title" id="topic-{{ card.topic_key }}">
+            {% icon card.icon_name "card__topic-icon" %}
+            <span class="card__topic-name">{{ card.name }}</span>
+        </h3>
+        <p class="card__summary">{{ card.summary }}</p>
+    </a>
 </li>

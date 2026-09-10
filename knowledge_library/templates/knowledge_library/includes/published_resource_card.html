@@ -1,0 +1,15 @@
+{% load wagtailcore_tags %}
+<li class="card card--resource">
+    <div class="card__body">
+        <h3 class="card__title"><a href="{% pageurl resource %}">{{ resource.title }}</a></h3>
+        <ul class="tag-list card__topics" role="list" aria-label="Primary topic"><li class="tag">{{ resource.primary_topic.title }}</li></ul>
+        <p class="card__summary">{{ resource.short_summary }}</p>
+    </div>
+    <div class="card__details">
+        <dl class="card__metadata">
+            <div><dt>Type</dt><dd>{{ resource.get_resource_type_display }}</dd></div>
+            {% if resource.reading_time != None %}<div><dt>Read time</dt><dd>{{ resource.reading_time }} minute{{ resource.reading_time|pluralize }}</dd></div>{% endif %}
+            {% if resource.review_date %}<div><dt>Reviewed</dt><dd><time datetime="{{ resource.review_date|date:'Y-m' }}">{{ resource.review_date|date:"F Y" }}</time></dd></div>{% endif %}
+        </dl>
+    </div>
+</li>

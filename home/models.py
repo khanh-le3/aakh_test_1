@@ -15,14 +15,14 @@ class HomePage(Page):
     hero_heading = models.CharField(
         "heading first line",
         max_length=120,
-        default="Autism research you can use",
+        default="Autism research",
         help_text="The start of the main headline, shown in the primary brand colour.",
     )
     hero_heading_line_2 = models.CharField(
         "heading second line",
         max_length=120,
         blank=True,
-        default="",
+        default="you can use",
         help_text=(
             "Optional continuation, shown on a new line in the secondary brand colour. "
             "Both parts may wrap further on small screens."
@@ -32,6 +32,12 @@ class HomePage(Page):
     hero_intro = RichTextField(  # pyright: ignore[reportCallIssue]
         features=["bold", "italic", "link"],
         blank=True,
+        default=(
+            "<p>Welcome to the Australian Autism Knowledge Hub, where we turn "
+            "autism research into clear, trustworthy information.</p>"
+            "<p>Find out what we know, what we’re still learning, and what it "
+            "could mean for you.</p>"
+        ),
         help_text="One or two short paragraphs welcoming visitors.",
     )
 

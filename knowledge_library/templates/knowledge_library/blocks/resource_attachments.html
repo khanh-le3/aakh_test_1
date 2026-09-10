@@ -1,0 +1,17 @@
+{% load aakh_tags %}
+{% if attachments %}
+<ul class="resource-attachments" role="list">
+    {% for attachment in attachments %}
+    <li class="resource-attachments__item">
+        <a class="resource-attachments__link" href="{{ attachment.document.url }}" target="_self"{% if attachment.download_directly %} download{% endif %}>
+            {% icon "file-down" "resource-attachments__icon" %}
+            <span class="resource-attachments__details">
+                <span class="resource-attachments__title">{{ attachment.title }}</span>
+                <span class="resource-attachments__meta">File type: {{ attachment.document.file_extension|upper|default:"Not available" }} · Size: {% if attachment.file_size != None %}{{ attachment.file_size|filesizeformat }}{% else %}Not available{% endif %}</span>
+            </span>
+        </a>
+        {% if attachment.description %}<div class="resource-attachments__description">{{ attachment.description|linebreaks }}</div>{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}

@@ -1,0 +1,8 @@
+{% load wagtailcore_tags %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list" role="list">
+        <li><a class="breadcrumbs__link" href="{% pageurl home_page %}">Home</a></li>
+        <li><a class="breadcrumbs__link" href="{% pageurl library_page %}">Knowledge library</a></li>
+        <li><span aria-current="page">{{ page.title }}</span></li>
+    </ol>
+</nav>

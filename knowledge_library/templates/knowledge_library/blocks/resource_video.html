@@ -1,0 +1,14 @@
+{% load wagtailcore_tags %}
+<div class="resource-content__media">
+  <p class="resource-content__media-title" id="{{ resource_block_id }}-title"><strong>{{ value.title }}</strong></p>
+  <video class="resource-content__player" controls preload="none" playsinline crossorigin="anonymous" aria-labelledby="{{ resource_block_id }}-title">
+    <source src="{{ value.url }}">
+    <track kind="captions" src="{{ value.captions_url }}" srclang="en" label="English captions" default>
+    Your browser does not support this video player.
+  </video>
+  <p><a href="{{ value.url }}">Open video: {{ value.title }}</a></p>
+  <div class="resource-content__transcript">
+    <p><strong>Transcript: {{ value.title }}</strong></p>
+    {{ value.transcript|richtext }}
+  </div>
+</div>

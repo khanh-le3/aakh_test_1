@@ -1,0 +1,23 @@
+{% load wagtailcore_tags %}
+<li>
+    <a class="card card--resource card--recent card--topic-accent-{{ resource.primary_topic.accent }}"
+       href="{% pageurl resource %}" aria-labelledby="recent-resource-{{ resource.pk }}">
+        <div class="card__body">
+            <h3 class="card__title" id="recent-resource-{{ resource.pk }}">{{ resource.title }}</h3>
+            <ul class="tag-list card__topics" role="list" aria-label="Topics">
+                <li class="tag tag--topic-accent-{{ resource.primary_topic.accent }}">{{ resource.primary_topic.title }}</li>
+                {% for topic in resource.secondary_topics.all %}
+                <li class="tag tag--topic-accent-{{ topic.accent }}">{{ topic.title }}</li>
+                {% endfor %}
+            </ul>
+            <p class="card__summary">{{ resource.short_summary }}</p>
+        </div>
+        <div class="card__details">
+            <dl class="card__metadata">
+                <div><dt>Type</dt><dd>{{ resource.get_resource_type_display }}</dd></div>
+                {% if resource.reading_time != None %}<div><dt>Read time</dt><dd>{{ resource.reading_time }} minute{{ resource.reading_time|pluralize }}</dd></div>{% endif %}
+                {% if resource.review_date %}<div><dt>Reviewed</dt><dd><time datetime="{{ resource.review_date|date:'Y-m' }}">{{ resource.review_date|date:"F Y" }}</time></dd></div>{% endif %}
+            </dl>
+        </div>
+    </a>
+</li>

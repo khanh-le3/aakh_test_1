@@ -1,0 +1,7 @@
+{% extends "wagtailadmin/userbar/base.html" %}
+{% load static wagtailadmin_tags %}
+
+{% block branding_logo %}
+  {% static 'img/favicon.png' as logo_url %}
+  <img class="w-userbar-icon" src="{% build_absolute_url logo_url %}" alt="" width="28" height="28">
+{% endblock %}

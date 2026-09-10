@@ -1,0 +1,9 @@
+{% load wagtailimages_tags %}
+<figure class="resource-content__figure{% if value.size == 'small' %} resource-content__figure--small{% elif value.size == 'medium' %} resource-content__figure--medium{% endif %}">
+  {% if value.decorative %}
+    {% image value.image width-1200 alt="" class="resource-content__image" loading="lazy" %}
+  {% else %}
+    {% image value.image width-1200 alt=value.alt_text class="resource-content__image" loading="lazy" %}
+  {% endif %}
+  {% if value.caption %}<figcaption class="resource-content__caption">{{ value.caption|linebreaksbr }}</figcaption>{% endif %}
+</figure>

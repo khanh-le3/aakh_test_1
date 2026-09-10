@@ -2,6 +2,7 @@
 from pathlib import Path
 
 from django import template
+from django.conf import settings
 from django.contrib.staticfiles import finders
 from django.utils.safestring import mark_safe
 
@@ -9,7 +10,7 @@ from core.navigation import resolve_main_menu
 
 register = template.Library()
 
-# In-process cache of processed SVG markup, keyed by (name, css_class).
+# Production cache of processed SVG markup, keyed by (name, css_class).
 _ICON_CACHE = {}
 
 
@@ -22,7 +23,9 @@ def icon(name, css_class=""):
     by default. Pass meaning through visible text or aria-label on the parent.
     """
     key = (name, css_class)
-    if key not in _ICON_CACHE:
+    # SVG edits do not trigger Django's Python autoreloader. Re-read them in
+    # development so changed icon assets appear on the next page request.
+    if settings.DEBUG or key not in _ICON_CACHE:
         path = finders.find(f"icons/{name}.svg")
         if path is None:
             return ""  # Unknown icon: render nothing rather than break the page.

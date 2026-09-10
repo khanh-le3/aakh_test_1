@@ -7,7 +7,7 @@
                 <h2 class="footer__heading">Quick links</h2>
                 {# Same fixed menu as the header; edit core/navigation.py. #}
                 {% main_menu as menu_items %}
-                <ul class="footer__links">
+                <ul class="footer__links footer__links--quick">
                     {% for item in menu_items %}
                     <li>
                         <a class="nav-link" href="{{ item.path }}"
@@ -32,39 +32,38 @@
             </nav>
 
             <div class="footer__brand">
-                <img class="footer__brand-logo" src="{% static 'img/logo-aakh-colour-transparent.png' %}"
+                <img class="footer__brand-logo" src="{% static 'img/logo-aakh-colour.png' %}"
                      alt="Australian Autism Knowledge Hub" width="491" height="107">
-                {% comment %}TODO: enable once a newsletter service is chosen (form currently has no backend).
-                <form class="subscribe-form" method="post" action="">
+                {# TODO: connect a newsletter service before enabling these controls. #}
+                <div class="subscribe-form">
                     <h2 class="subscribe-form__heading">Subscribe to receive latest news from the Australian Autism Knowledge Hub</h2>
                     <div class="subscribe-form__row">
-                        <label class="visually-hidden" for="subscribe-email">Email address</label>
                         <input class="input" type="email" id="subscribe-email" name="email"
-                               placeholder="Enter your email address" autocomplete="email">
-                        <button class="btn btn--secondary btn--field" type="submit">Subscribe</button>
+                               placeholder="Enter your email address" autocomplete="email"
+                               aria-describedby="subscribe-note" disabled>
+                        <button class="btn btn--secondary btn--field" type="button"
+                                aria-describedby="subscribe-note" disabled>Subscribe</button>
                     </div>
-                </form>
-                {% endcomment %}
+                </div>
             </div>
         </div>
 
         <div class="footer__ack footer__ack--cols">
             <div class="footer__ack-block">
                 <div class="footer__ack-logos">
-                    <img src="{% static 'img/logo-gov-health.png' %}"
+                    <img src="{% static 'img/logo-dhda.svg' %}"
                          alt="Australian Government - Department of Health, Disability and Ageing">
                 </div>
                 <p>The Australian Autism Knowledge Hub is funded by the Department of Health, Disability, and Ageing.</p>
             </div>
             <div class="footer__ack-block">
                 <div class="footer__ack-logos">
-                    <img src="{% static 'img/logo-latrobe.jpg' %}" alt="La Trobe University">
-                    <img src="{% static 'img/logo-otarc.png' %}" alt="Olga Tennison Autism Research Centre">
+                    <img src="{% static 'img/logo-ltu-otarc.png' %}" alt="Olga Tennison Autism Research Centre">
                 </div>
                 <p>
                     The Australian Autism Knowledge Hub is a part of The Olga Tennison Autism
-                    Research Centre at La Trobe University. For more information, visit
-                    <a href="https://www.latrobe.edu.au/otarc">the OTARC website</a>.
+                    Research Centre at La Trobe University. For more information,
+                    <a href="https://www.latrobe.edu.au/otarc">visit the OTARC website</a>.
                 </p>
             </div>
         </div>
@@ -87,21 +86,25 @@
         </div>
 
         <div class="footer__legal">
-            {# TODO: create these pages (GenericPage) and link them via the page tree. #}
-            <ul class="footer__legal-links">
-                <li><a class="nav-link" href="/copyright/">Copyright</a></li>
-                <li><a class="nav-link" href="/disclaimer/">Disclaimer</a></li>
-                <li><a class="nav-link" href="/privacy/">Privacy</a></li>
-                <li><a class="nav-link" href="/accessibility-statement/">Accessibility statement</a></li>
-                <li><a class="nav-link" href="/sitemap/">Sitemap</a></li>
-            </ul>
-            <div class="footer__colophon">
-                <p>&copy; Copyright Australian Autism Knowledge Hub</p>
-                <p>
-                    Website by the Australian Centre for Artificial Intelligence
-                    in Medical Innovation (ACAMI)
-                </p>
+            <div class="footer__legal-column">
+                {# TODO: create these pages (GenericPage) and link them via the page tree. #}
+                <ul class="footer__legal-links">
+                    <li><a class="nav-link" href="/copyright/">Copyright</a></li>
+                    <li><a class="nav-link" href="/disclaimer/">Disclaimer</a></li>
+                    <li><a class="nav-link" href="/privacy/">Privacy</a></li>
+                    <li><a class="nav-link" href="/accessibility-statement/">Accessibility statement</a></li>
+                    <li><a class="nav-link" href="/sitemap/">Sitemap</a></li>
+                </ul>
+                <p class="footer__copyright">&copy; 2026 La Trobe University</p>
+            </div>
+            <div class="footer__legal-column">
                 <img class="footer__acami" src="{% static 'img/logo-acami.svg' %}" alt="">
+                <div class="footer__colophon">
+                    <p>
+                        Website by the <a href="https://www.latrobe.edu.au/research/acami">Australian Centre for Artificial Intelligence
+                        in Medical Innovation (ACAMI)</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

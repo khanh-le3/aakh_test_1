@@ -1,9 +1,11 @@
 from django.db import models
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.fields import RichTextField
+from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
+from wagtail.search import index
 
+from .block import ContentSectionBlock, TeamSectionBlock
 
 class HomePage(Page):
     """The site home page: hero, featured resources, news and updates."""
@@ -94,4 +96,37 @@ class HomePage(Page):
             ],
             heading="Featured resources",
         ),
+    ]
+
+class GenericPage(Page):
+    """A flexible information page for top-level website content."""
+
+    intro = RichTextField(
+        blank=True,
+        features=["bold", "italic", "link"],
+        help_text="Short introduction shown below the page title.",
+    )
+
+    body = StreamField(
+        [
+            ("section", ContentSectionBlock()),
+            ("team_section", TeamSectionBlock()),
+        ],
+        blank=True,
+        use_json_field=True,
+    )
+
+    template = "home/generic_page.html"
+
+    parent_page_types = ["home.HomePage"]
+    subpage_types = []
+
+    content_panels = Page.content_panels + [
+        FieldPanel("intro"),
+        FieldPanel("body"),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField("intro"),
+        index.SearchField("body"),
     ]

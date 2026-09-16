@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}generic-page{% endblock %}
+
+{% block content %}
+
+{% wagtail_site as current_site %}
+
+<section class="generic-page__hero" aria-labelledby="page-heading">
+    <div class="container generic-page__hero-inner">
+
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+                <li>
+                    <a
+                        class="breadcrumbs__link"
+                        href="{% pageurl current_site.root_page %}"
+                    >
+                        Home
+                    </a>
+                </li>
+
+                <li aria-current="page">
+                    {{ page.title }}
+                </li>
+            </ol>
+        </nav>
+
+        <div class="generic-page__hero-copy">
+
+            <h1 id="page-heading">
+                {{ page.title }}
+            </h1>
+
+            {% if page.intro %}
+                <div class="generic-page__intro">
+                    {{ page.intro|richtext }}
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="generic-page__decoration" aria-hidden="true">
+            <span
+                class="generic-page__circle
+                       generic-page__circle--large">
+            </span>
+
+            <span
+                class="generic-page__circle
+                       generic-page__circle--small">
+            </span>
+        </div>
+
+    </div>
+</section>
+
+
+{% if page.body %}
+
+<div class="generic-page__body">
+
+    {% for block in page.body %}
+        {% include_block block %}
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+{% endblock content %}

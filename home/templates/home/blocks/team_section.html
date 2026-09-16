@@ -1,0 +1,79 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="section generic-section">
+    <div class="container">
+
+        <div class="section__reading-width">
+
+            <div class="section__header">
+                <h2>
+                    {{ value.heading }}
+                </h2>
+            </div>
+
+            {% if value.intro %}
+                <div class="section__body generic-section__body">
+                    {{ value.intro|richtext }}
+                </div>
+            {% endif %}
+
+        </div>
+
+
+        <ul class="team-grid">
+
+            {% for member in value.members %}
+
+                <li class="team-grid__item">
+
+                    <article class="team-card">
+
+                        {% if member.image %}
+
+                            {% image member.image fill-640x420 as portrait %}
+
+                            <div class="team-card__image">
+
+                                <img
+                                    src="{{ portrait.url }}"
+                                    width="{{ portrait.width }}"
+                                    height="{{ portrait.height }}"
+                                    alt=""
+                                    loading="lazy"
+                                >
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <div class="team-card__body">
+
+                            <h3 class="team-card__name">
+                                {{ member.name }}
+                            </h3>
+
+                            {% if member.role %}
+                                <p class="team-card__role">
+                                    {{ member.role }}
+                                </p>
+                            {% endif %}
+
+                            {% if member.bio %}
+                                <div class="team-card__bio">
+                                    {{ member.bio|richtext }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                    </article>
+
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+</section>

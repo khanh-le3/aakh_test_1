@@ -1,0 +1,21 @@
+{% load wagtailcore_tags %}
+
+<section class="section generic-section">
+    <div class="container">
+
+        <div class="section__reading-width">
+
+            <div class="section__header">
+                <h2>
+                    {{ value.heading }}
+                </h2>
+            </div>
+
+            <div class="section__body generic-section__body">
+                {{ value.body|richtext }}
+            </div>
+
+        </div>
+
+    </div>
+</section>

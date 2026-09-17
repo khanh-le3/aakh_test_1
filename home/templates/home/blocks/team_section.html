@@ -75,5 +75,27 @@
 
         </ul>
 
+        {% if value.partnership %}
+            <div class="about-team__partnership">
+                {{ value.partnership|richtext }}
+            </div>
+        {% endif %}
+
+
+        {% if value.more_team_url %}
+            <p class="about-team__more">
+                <a href="{{ value.more_team_url }}">
+                    {{ value.more_team_label }}
+                </a>
+            </p>
+        {% endif %}
+
+
+        {% if value.funding %}
+            <div class="about-team__funding">
+                {{ value.funding|richtext }}
+            </div>
+        {% endif %}
+
     </div>
 </section>

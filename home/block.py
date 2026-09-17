@@ -69,6 +69,25 @@ class TeamSectionBlock(blocks.StructBlock):
         max_num=12,
     )
 
+    partnership = blocks.RichTextBlock(
+        required=False,
+        features=RICH_TEXT_FEATURES,
+    )
+
+    funding = blocks.RichTextBlock(
+        required=False,
+        features=RICH_TEXT_FEATURES,
+    )
+
+    more_team_label = blocks.CharBlock(
+        required=False,
+        max_length=100,
+    )
+
+    more_team_url = blocks.URLBlock(
+        required=False,
+    )
+
     class Meta:
         template = "home/blocks/team_section.html"
         label = "Team section"
